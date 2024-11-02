@@ -11,7 +11,6 @@ namespace QuizConfig
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new MainVM();
         }
     }
 }
