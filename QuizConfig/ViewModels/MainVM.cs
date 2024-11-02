@@ -61,9 +61,10 @@ namespace QuizConfig.ViewModels
                 ActivePack = null;
         }
 
+        private void SetActivePack(object? obj)
             {
-                number++;
-                this.QuestionPacks.Add(new QuestionPackModel(new QuestionModel()) { Name = $"Pack {number}"});
+            ActivePack = obj as QuestionPackModel;
+            Debug.WriteLine($"{obj}");
                 Debug.WriteLine(QuestionPacks[number - 1].Name);
                 Thread.Sleep(1000);
             }
