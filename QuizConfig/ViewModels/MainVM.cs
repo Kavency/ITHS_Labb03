@@ -27,6 +27,10 @@ namespace QuizConfig.ViewModels
             get { return _selectedMenuItem; }
             set { _selectedMenuItem = value; OnPropertyChanged(); }
         }
+
+        public RelayCommand AddPackCommand { get; }
+        public RelayCommand SetActivePackCMD { get; }
+        public RelayCommand DeletePackCMD { get; }
         public MenuVM MenuVM { get; set; }
         public MainVM()
         {
