@@ -35,9 +35,22 @@ namespace QuizConfig.ViewModels
         public MainVM()
         {
             this.MenuVM = new MenuVM(this);
-
             this.QuestionPacks = new ObservableCollection<QuestionPackModel>();
-            this.QuestionPacks.Add(new QuestionPackModel(new QuestionModel()) { Name = "Pack 1"});
+
+            this.AddPackCommand = new RelayCommand(AddPack);
+            this.SetActivePackCMD = new RelayCommand(SetActivePack);
+            this.DeletePackCMD = new RelayCommand(DeletePack);
+
+
+            for (int i = 0; i < 5; i++)
+            {
+                QuestionPacks.Add(new QuestionPackModel(new QuestionModel()) { Name = $"Pack {i + 1}" });
+                Debug.WriteLine($"{QuestionPacks[i].Name} was added.");
+            }
+
+            this.ActivePack = this.QuestionPacks.First();
+
+        }
             
             for(int i = 0; i < 10; i++)
             {
