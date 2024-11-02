@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              xmlns:local="clr-namespace:QuizConfig.Views.UserControls"
              mc:Ignorable="d"
              d:DesignHeight="35"
@@ -20,14 +21,19 @@
                   HorizontalAlignment="Left">
                 <MenuItem Header="_File">
                     <MenuItem Header="Add question pack"
-                              Command="{Binding AddPackCommand}" />
-                    
+                              Icon="{fa:Icon file}"
+                              Command="{Binding AddPackCommand}"
+                              InputGestureText="Ctrl + n"/>
+
                     <MenuItem Header="Select question pack"
+                              Icon="{fa:Icon squarecheck}"
                               ItemsSource="{Binding Path=QuestionPacks}">
                         <MenuItem.ItemContainerStyle>
                             <Style TargetType="MenuItem">
                                 <Setter Property="Header"
                                         Value="{Binding Name}" />
+                                <Setter Property="Icon"
+                                        Value="{fa:Icon clipboardquestion}" />
                                 <Setter Property="Command"
                                         Value="{Binding DataContext.SetActivePackCMD, RelativeSource={RelativeSource AncestorType=Window}}" />
                                 <Setter Property="CommandParameter"
@@ -36,8 +42,17 @@
                         </MenuItem.ItemContainerStyle>
                     </MenuItem>
 
-                    <MenuItem Header="Delete question pack" 
-                              Command="{Binding DataContext.DeletePackCMD, RelativeSource={RelativeSource AncestorType=Window}}"/>
+                    <MenuItem Header="Delete question pack"
+                              Icon="{fa:Icon trashcan}"
+                              InputGestureText="Ctrl + del"
+                              Command="{Binding DataContext.DeletePackCMD, RelativeSource={RelativeSource AncestorType=Window}}" />
+                    <Separator />
+                    <MenuItem Header="Import questions"
+                              Icon="{fa:Icon download}" />
+                    <Separator />
+                    <MenuItem Header="E_xit"
+                              Icon="{fa:Icon righttobracket}"
+                              InputGestureText="Ctrl + x" />
                 </MenuItem>
             </Menu>
         </StackPanel>
