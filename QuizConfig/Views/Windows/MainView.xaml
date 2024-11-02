@@ -52,15 +52,21 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Vertical">
-                        <TextBlock Text="Question:" FontWeight="Bold"/>
-                        <TextBlock Text="{Binding Name}"/>
+                        <TextBlock Text="Question:"
+                                   FontWeight="Bold" />
+                        <TextBlock Text="{Binding Name}" />
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
 
-        <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Vertical">
-            <Button Content="Add Pack" Command="{Binding AddPackCommand}"/>
+        <StackPanel Grid.Column="1"
+                    Grid.Row="2"
+                    Orientation="Vertical">
+            <Button Content="Add Pack"
+                    Command="{Binding AddPackCommand}" />
+            <Label Content="Active pack:" />
+            <Label Content="{Binding ActivePack.Name}" />
         </StackPanel>
     </Grid>
 </Window>
