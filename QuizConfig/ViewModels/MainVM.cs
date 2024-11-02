@@ -52,7 +52,15 @@ namespace QuizConfig.ViewModels
 
         }
             
-            for(int i = 0; i < 10; i++)
+        private void DeletePack(object? obj)
+        {
+            QuestionPacks.Remove(ActivePack);
+            if (QuestionPacks.Count > 0)
+                ActivePack = QuestionPacks.First();
+            else
+                ActivePack = null;
+        }
+
             {
                 number++;
                 this.QuestionPacks.Add(new QuestionPackModel(new QuestionModel()) { Name = $"Pack {number}"});
