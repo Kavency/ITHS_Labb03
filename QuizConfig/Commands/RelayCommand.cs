@@ -9,14 +9,22 @@ namespace QuizConfig.Commands
 
         public event EventHandler? CanExecuteChanged;
 
+
+        public void RaiseCanExecuteChanged()
+        {
+            CanExecuteChanged?.Invoke(this, EventArgs.Empty);
+        }
+
+
         public bool CanExecute(object? parameter)
         {
-            throw new NotImplementedException();
+            return canExecute is null || canExecute(parameter);
         }
+
 
         public void Execute(object? parameter)
         {
-            throw new NotImplementedException();
+            execute(parameter);
         }
     }
 }
