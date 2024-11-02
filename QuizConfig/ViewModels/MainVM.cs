@@ -1,5 +1,5 @@
 ﻿using QuizConfig.Commands;
-﻿using QuizConfig.Models;
+using QuizConfig.Models;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 
