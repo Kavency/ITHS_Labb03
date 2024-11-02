@@ -6,8 +6,27 @@ namespace QuizConfig.ViewModels
 {
     internal class MainVM : VMBase
     {
-        private int number = 1;
+        private QuestionPackModel _activePack;
+        private int _selectedMenuItem;
+
         public ObservableCollection<QuestionPackModel> QuestionPacks { get; set; }
+
+
+        public QuestionPackModel ActivePack
+        {
+            get => _activePack;
+            set
+            {
+                _activePack = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public int SelectedMenuItem
+        {
+            get { return _selectedMenuItem; }
+            set { _selectedMenuItem = value; OnPropertyChanged(); }
+        }
         public MenuVM MenuVM { get; set; }
         public MainVM()
         {
