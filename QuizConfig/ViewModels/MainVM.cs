@@ -65,10 +65,13 @@ namespace QuizConfig.ViewModels
             {
             ActivePack = obj as QuestionPackModel;
             Debug.WriteLine($"{obj}");
-                Debug.WriteLine(QuestionPacks[number - 1].Name);
-                Thread.Sleep(1000);
             }
 
+        private void AddPack(object? obj)
+        {
+            QuestionPackModel newPack = new QuestionPackModel(new QuestionModel()) { Name = $"Added with button" };
+            QuestionPacks.Add(newPack);
+            ActivePack = newPack;
         }
     }
 }
