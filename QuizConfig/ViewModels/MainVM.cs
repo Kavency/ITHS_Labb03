@@ -52,7 +52,7 @@ namespace QuizConfig.ViewModels
             this.ActivePack = this.QuestionPacks.First();
 
         }
-            
+
         private void DeletePack(object? obj)
         {
             QuestionPacks.Remove(ActivePack);
@@ -63,10 +63,10 @@ namespace QuizConfig.ViewModels
         }
 
         private void SetActivePack(object? obj)
-            {
+        {
             ActivePack = obj as QuestionPackModel;
             Debug.WriteLine($"{obj}");
-            }
+        }
 
         private void AddPack(object? obj)
         {
