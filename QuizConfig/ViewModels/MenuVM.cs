@@ -1,4 +1,5 @@
 ﻿using QuizConfig.Commands;
+using QuizConfig.Views.Dialogs;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
@@ -10,6 +11,7 @@ namespace QuizConfig.ViewModels
         #region Properties
         public MainVM MainVM { get; set; }
         public RelayCommand SwitchViewCMD { get; }
+        public RelayCommand ExitProgramCMD { get; }
         #endregion
 
         #region Constructor
@@ -18,7 +20,9 @@ namespace QuizConfig.ViewModels
             this.MainVM = mainVM;
 
             SwitchViewCMD = new RelayCommand(SwitchView);
+            ExitProgramCMD = new RelayCommand(ExitProgram);
         }
+
         #endregion
 
         #region Methods
@@ -36,6 +40,14 @@ namespace QuizConfig.ViewModels
                 MainVM.EditVisibility = Visibility.Visible;
                 MainVM.PlayVisibility = Visibility.Collapsed;
             }
+        }
+
+        private void ExitProgram(object? obj)
+        {
+            //throw new NotImplementedException();
+            ConfirmExitDialog exitDialog = new ConfirmExitDialog();
+            exitDialog.Owner = Application.Current.MainWindow;
+            exitDialog.ShowDialog();
         }
         #endregion
     }

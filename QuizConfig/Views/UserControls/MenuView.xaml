@@ -52,7 +52,8 @@
                     <Separator />
                     <MenuItem Header="E_xit"
                               Icon="{fa:Icon righttobracket}"
-                              InputGestureText="Ctrl x" />
+                              InputGestureText="Ctrl x"
+                              Command="{Binding MenuVM.ExitProgramCMD}"/>
                 </MenuItem>
 
                 <MenuItem Header="_Edit">
