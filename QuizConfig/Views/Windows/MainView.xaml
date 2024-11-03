@@ -11,15 +11,15 @@
         Title="QuizConfig 2.0"
         Height="450"
         Width="800"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
     <Window.DataContext>
         <vm:MainVM />
     </Window.DataContext>
     <Grid>
         <StackPanel Orientation="Vertical">
             <views:MenuView />
-            <views:ConfigView />
-            <views:PlayView />
+            <views:ConfigView Visibility="{Binding EditVisibility}" />
+            <views:PlayView Visibility="{Binding PlayVisibility}" />
         </StackPanel>
     </Grid>
 </Window>
