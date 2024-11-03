@@ -1,8 +1,10 @@
-﻿using System.Collections.ObjectModel;
+﻿using QuizConfig.ViewModels;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace QuizConfig.Models
 {
-    internal class QuestionPackModel
+    internal class QuestionPackModel : VMBase
     {
         #region Properties
         public string Name { get; set; }

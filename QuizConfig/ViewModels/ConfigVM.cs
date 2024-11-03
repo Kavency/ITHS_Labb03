@@ -17,9 +17,9 @@ namespace QuizConfig.ViewModels
         private Visibility _saveAndCloseButtonVisibility = Visibility.Visible;
         private Visibility _saveAndAddButtonVisibility = Visibility.Visible;
         private Visibility _updateButtonVisibility = Visibility.Collapsed;
-        private int _selectedQuestionIndex;
+        private int? _selectedQuestionIndex = null;
         private int _selectedMenuItem;
-        private QuestionModel _selectedQuestion;
+        private QuestionModel _selectedQuestion = null;
 
         #endregion
 
@@ -77,7 +77,7 @@ namespace QuizConfig.ViewModels
             get { return _updateButtonVisibility; }
             set { _updateButtonVisibility = value; OnPropertyChanged(); }
         }
-        public int SelectedQestionIndex
+        public int? SelectedQestionIndex
         {
             get { return _selectedQuestionIndex; }
             set { _selectedQuestionIndex = value; }
@@ -126,45 +126,65 @@ namespace QuizConfig.ViewModels
             this.CancelCMD = new RelayCommand(CancelInput);
             this.DeleteQuestionCMD = new RelayCommand(DeleteQuestion, CanDeleteQuestion);
         }
+        #endregion
 
+
+        #region Methods
         private void DeleteQuestion(object? obj)
         {
-            throw new NotImplementedException();
+            _mainVM.ActivePack.Questions.Remove(SelectedQuestion);
+            // Save to file...
         }
 
         private bool CanDeleteQuestion(object? arg)
         {
-            throw new NotImplementedException();
+            if (_selectedQuestion is not null)
+                return true;
+            else
+                return false;
         }
 
         private void CancelInput(object? obj)
         {
-            throw new NotImplementedException();
+            ClearTextBoxes();
+            QuestionFormVisibility = Visibility.Hidden;
+            SelectedQuestion = null;
+            SelectedQestionIndex = null;
         }
 
         private void UpdateQuestion(object? obj)
         {
-            throw new NotImplementedException();
+            SelectedQuestion.Question = QuestionTextBox;
+            SelectedQuestion.CorrectAnswer = CorrectAnswerTextBox;
+            SelectedQuestion.IncorrectAnswers[0] = WrongAnswer1TextBox;
+            SelectedQuestion.IncorrectAnswers[1] = WrongAnswer1TextBox;
+            SelectedQuestion.IncorrectAnswers[2] = WrongAnswer2TextBox;
+            // TODO: Save to file
+            CancelInput(obj);
         }
 
         private void AddQuestionAndClear(object? obj)
         {
-            throw new NotImplementedException();
+            // TODO: Check if textboxes are empty
+            QuestionModel newQuestion = new QuestionModel(QuestionTextBox, CorrectAnswerTextBox, WrongAnswer1TextBox, WrongAnswer2TextBox, WrongAnswer3TextBox);
+            _mainVM.ActivePack.Questions.Add(newQuestion);
+            // TODO: Save to file
+            ClearTextBoxes();
         }
 
         private void AddQuestionAndClose(object? obj)
         {
-            throw new NotImplementedException();
+            QuestionModel newQuestion = new QuestionModel(QuestionTextBox, CorrectAnswerTextBox, WrongAnswer1TextBox, WrongAnswer2TextBox, WrongAnswer3TextBox);
+            _mainVM.ActivePack.Questions.Add(newQuestion);
+            // TODO: Save to file
+            CancelInput(obj);
         }
 
         private void ChangeQuestionFormVisibility(object? obj)
         {
             throw new NotImplementedException();
         }
-        #endregion
 
-
-        #region Methods
         private void AddPack(object? obj)
         {
             QuestionPackModel newPack = new QuestionPackModel() { Name = $"Added with button" };
@@ -181,6 +201,14 @@ namespace QuizConfig.ViewModels
                 _mainVM.ActivePack = null;
         }
 
+        private void ClearTextBoxes()
+        {
+            QuestionTextBox = string.Empty;
+            CorrectAnswerTextBox = string.Empty;
+            WrongAnswer1TextBox = string.Empty;
+            WrongAnswer2TextBox = string.Empty;
+            WrongAnswer3TextBox = string.Empty;
+        }
         #endregion
     }
 }

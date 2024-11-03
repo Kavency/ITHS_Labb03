@@ -45,20 +45,28 @@ namespace QuizConfig.ViewModels
 
             this.SetActivePackCMD = new RelayCommand(SetActivePack);
 
-
-
+            
             for (int i = 0; i < 5; i++)
             {
                 QuestionPacks.Add(new QuestionPackModel() { Name = $"Pack {i + 1}" });
                 Debug.WriteLine($"{QuestionPacks[i].Name} was added.");
                 for (int j = 0; j < 5; j++)
                 {
-                    QuestionPacks[i].Questions.Add(new QuestionModel() { Question = $"Q {i + 1} - {j + 1}" });
+                    QuestionPacks[i].Questions.Add(new QuestionModel("What year?", "1981", "1977", "1985","1976"));
                     Debug.WriteLine($"Question {j + 1} added");
                 }
             }
 
+
             this.ActivePack = this.QuestionPacks.First();
+            
+            this.MenuVM = new MenuVM(this);
+            this.ConfigVM = new ConfigVM(this);
+
+            this.SetActivePackCMD = new RelayCommand(SetActivePack);
+
+
+
 
         }
         #endregion

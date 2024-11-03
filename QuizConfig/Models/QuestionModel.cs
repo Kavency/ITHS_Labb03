@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using QuizConfig.ViewModels;
+using System.Text.Json.Serialization;
 
 namespace QuizConfig.Models
 {

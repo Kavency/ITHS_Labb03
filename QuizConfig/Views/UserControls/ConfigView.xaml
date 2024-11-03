@@ -128,19 +128,19 @@
                      Height="100"
                      TextWrapping="Wrap"
                      AcceptsReturn="True"
-                     Text="{}" />
+                     Text="{Binding ConfigVM.QuestionTextBox}" />
             <Label Content="Correct answer:"
                    Padding="0,5,0,0" />
-            <TextBox Text="{}" />
+            <TextBox Text="{Binding ConfigVM.CorrectAnswerTextBox}" />
             <Label Content="Wrong answer 1:"
                    Padding="0,5,0,0" />
-            <TextBox Text="{}" />
+            <TextBox Text="{Binding ConfigVM.WrongAnswer1TextBox}" />
             <Label Content="Wrong answer 2:"
                    Padding="0,5,0,0" />
-            <TextBox Text="{}" />
+            <TextBox Text="{Binding ConfigVM.WrongAnswer2TextBox}" />
             <Label Content="Wrong answer 3:"
                    Padding="0,5,0,0" />
-            <TextBox Text="{}" />
+            <TextBox Text="{Binding ConfigVM.WrongAnswer3TextBox}" />
 
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Center">
