@@ -4,7 +4,7 @@ using System.Windows;
 
 namespace QuizConfig.ViewModels
 {
-    internal class ConfigVM : VMBase
+    internal class ConfigVM : Base
     {
         #region Fields
         private readonly MainVM _mainVM;
@@ -20,7 +20,6 @@ namespace QuizConfig.ViewModels
         private int? _selectedQuestionIndex = null;
         private int _selectedMenuItem;
         private QuestionModel _selectedQuestion = null;
-
         #endregion
 
         #region Properties

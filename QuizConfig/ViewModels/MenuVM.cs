@@ -5,7 +5,7 @@ using System.Windows.Controls;
 
 namespace QuizConfig.ViewModels
 {
-    internal class MenuVM : VMBase
+    internal class MenuVM : Base
     {
         #region Properties
         public MainVM MainVM { get; set; }
