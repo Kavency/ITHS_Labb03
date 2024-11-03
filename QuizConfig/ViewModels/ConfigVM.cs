@@ -1,7 +1,5 @@
 ﻿using QuizConfig.Commands;
 using QuizConfig.Models;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Windows;
 
 namespace QuizConfig.ViewModels
@@ -22,24 +20,12 @@ namespace QuizConfig.ViewModels
         private int _selectedQuestionIndex;
         private int _selectedMenuItem;
         private QuestionModel _selectedQuestion;
-        //private QuestionPackModel _activePack;
-        //private ObservableCollection<QuestionPackModel> _questionPacks;
 
         public RelayCommand AddPackCMD { get; }
         public RelayCommand DeletePackCMD { get; }
         #endregion
 
         #region Properties
-        //public QuestionPackModel ActivePack 
-        //{ 
-        //    get { return _mainVM.ActivePack; }
-        //    set { _activePack = value; OnPropertyChanged(); } 
-        //}
-        //public ObservableCollection<QuestionPackModel> QuestionPacks 
-        //{ 
-        //    get { return _mainVM.QuestionPacks; }
-        //    set { _questionPacks = value; OnPropertyChanged(); }
-        //}
         public string QuestionTextBox
 		{
 			get { return _questionTextBox; }
@@ -102,6 +88,7 @@ namespace QuizConfig.ViewModels
         }
         #endregion
 
+
         #region Contructor
         public ConfigVM(MainVM mainVM)
         {
@@ -111,6 +98,7 @@ namespace QuizConfig.ViewModels
             this.DeletePackCMD = new RelayCommand(DeletePack);
         }
         #endregion
+
 
         #region Methods
         private void DeletePack(object? obj)
@@ -122,11 +110,9 @@ namespace QuizConfig.ViewModels
                 _mainVM.ActivePack = null;
         }
 
-        
-
         private void AddPack(object? obj)
         {
-            QuestionPackModel newPack = new QuestionPackModel(new QuestionModel()) { Name = $"Added with button" };
+            QuestionPackModel newPack = new QuestionPackModel() { Name = $"Added with button" };
             _mainVM.QuestionPacks.Add(newPack);
             _mainVM.ActivePack = newPack;
         }

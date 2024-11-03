@@ -11,7 +11,7 @@
         Title="QuizConfig 2.0"
         Height="450"
         Width="800"
-        WindowStartupLocation="CenterScreen"
+        WindowStartupLocation="CenterScreen">
     <Window.DataContext>
         <vm:MainVM />
     </Window.DataContext>

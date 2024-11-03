@@ -49,7 +49,7 @@ namespace QuizConfig.ViewModels
 
             for (int i = 0; i < 5; i++)
             {
-                QuestionPacks.Add(new QuestionPackModel(new QuestionModel()) { Name = $"Pack {i + 1}" });
+                QuestionPacks.Add(new QuestionPackModel() { Name = $"Pack {i + 1}" });
                 Debug.WriteLine($"{QuestionPacks[i].Name} was added.");
                 for (int j = 0; j < 5; j++)
                 {
