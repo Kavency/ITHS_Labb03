@@ -6,7 +6,7 @@
              xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              xmlns:local="clr-namespace:QuizConfig.Views.UserControls"
              mc:Ignorable="d"
-             d:DesignHeight="35"
+             d:DesignHeight="20"
              d:DesignWidth="800">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -22,8 +22,8 @@
                 <MenuItem Header="_File">
                     <MenuItem Header="Add question pack"
                               Icon="{fa:Icon file}"
-                              Command="{Binding ConfigVM.AddPackCommand}"
-                              InputGestureText="Ctrl + n" />
+                              Command="{Binding ConfigVM.AddPackCMD}"
+                              InputGestureText="Ctrl n" />
 
                     <MenuItem Header="Select question pack"
                               Icon="{fa:Icon squarecheck}"
@@ -44,7 +44,7 @@
 
                     <MenuItem Header="Delete question pack"
                               Icon="{fa:Icon trashcan}"
-                              InputGestureText="Ctrl + del"
+                              InputGestureText="Ctrl Del"
                               Command="{Binding DataContext.ConfigVM.DeletePackCMD, RelativeSource={RelativeSource AncestorType=Window}}" />
                     <Separator />
                     <MenuItem Header="Import questions"
@@ -52,10 +52,25 @@
                     <Separator />
                     <MenuItem Header="E_xit"
                               Icon="{fa:Icon righttobracket}"
-                              InputGestureText="Ctrl + x" />
+                              InputGestureText="Ctrl x" />
                 </MenuItem>
+
+                <MenuItem Header="_Edit">
+                    <MenuItem Header="_Add"
+                              Icon="{fa:Icon plus}"
+                              InputGestureText="Ctrl +"/>
+                    <MenuItem Header="_Remove"
+                              Icon="{fa:Icon minus}"
+                              InputGestureText="Ctrl -"/>
+                    <MenuItem Header="_Options"
+                              Icon="{fa:Icon list}"
+                              InputGestureText="Ctrl o" />
+                </MenuItem>
+                
                 <MenuItem Header="View">
-                    <MenuItem Header="Edit"
+                    <MenuItem Header="_Edit"
+                              Icon="{fa:Icon pentosquare}"
+                              InputGestureText="Ctrl + e"
                               x:Name="EditMenuItem"
                               Command="{Binding MenuVM.SwitchViewCMD}">
                         <MenuItem.Style>
@@ -72,8 +87,10 @@
                             </Style>
                         </MenuItem.Style>
                     </MenuItem>
-                    <MenuItem Header="Play"
+                    <MenuItem Header="_Play"
                               x:Name="PlayMenuItem"
+                              Icon="{fa:Icon play}"
+                              InputGestureText="Ctrl + p"
                               Command="{Binding MenuVM.SwitchViewCMD}">
                         <MenuItem.Style>
                             <Style TargetType="MenuItem">
@@ -89,6 +106,13 @@
                             </Style>
                         </MenuItem.Style>
                     </MenuItem>
+                    <Separator />
+                    <MenuItem Header="Dark mode"
+                              Icon="{fa:Icon circlehalfstroke}" />
+                    <Separator />
+                    <MenuItem Header="Fullscreen"
+                              Icon="{fa:Icon expand}"
+                              InputGestureText="Ctrl Enter" />
                 </MenuItem>
             </Menu>
         </StackPanel>
