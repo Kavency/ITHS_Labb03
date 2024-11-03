@@ -2,41 +2,49 @@
 using QuizConfig.Models;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Windows;
 
 namespace QuizConfig.ViewModels
 {
     internal class MainVM : VMBase
     {
+        #region Fields
         private QuestionPackModel _activePack;
-        private int _selectedMenuItem;
+        private Visibility _editVisibility = Visibility.Visible;
+        private Visibility _playVisibility = Visibility.Collapsed;
+        #endregion
 
+        #region Properties
+        public MenuVM MenuVM { get; set; }
+        public ConfigVM ConfigVM { get; }
+        public Visibility EditVisibility
+        {
+            get => _editVisibility;
+            set { _editVisibility = value; OnPropertyChanged(); }
+        }
+        public Visibility PlayVisibility
+        {
+            get { return _playVisibility; }
+            set { _playVisibility = value; OnPropertyChanged(); }
+        }
+        public RelayCommand SetActivePackCMD { get; } // Flytta till menuVM? eller kanske inte?
         public ObservableCollection<QuestionPackModel> QuestionPacks { get; set; }
-
-
         public QuestionPackModel ActivePack
-        {   
+        {
             get => _activePack;
             set { _activePack = value; OnPropertyChanged(); }
         }
+        #endregion
 
-        public int SelectedMenuItem
-        {
-            get { return _selectedMenuItem; }
-            set { _selectedMenuItem = value; OnPropertyChanged(); }
-        }
-
-        public RelayCommand AddPackCommand { get; }
-        public RelayCommand SetActivePackCMD { get; }
-        public RelayCommand DeletePackCMD { get; }
-        public MenuVM MenuVM { get; set; }
+        #region Constructor
         public MainVM()
         {
             this.MenuVM = new MenuVM(this);
+            this.ConfigVM = new ConfigVM(this);
             this.QuestionPacks = new ObservableCollection<QuestionPackModel>();
 
-            this.AddPackCommand = new RelayCommand(AddPack);
             this.SetActivePackCMD = new RelayCommand(SetActivePack);
-            this.DeletePackCMD = new RelayCommand(DeletePack);
+
 
 
             for (int i = 0; i < 5; i++)
@@ -45,7 +53,7 @@ namespace QuizConfig.ViewModels
                 Debug.WriteLine($"{QuestionPacks[i].Name} was added.");
                 for (int j = 0; j < 5; j++)
                 {
-                    QuestionPacks[i].Questions.Add(new QuestionModel() { Question = $"Q {i + 1} - {j + 1}"});
+                    QuestionPacks[i].Questions.Add(new QuestionModel() { Question = $"Q {i + 1} - {j + 1}" });
                     Debug.WriteLine($"Question {j + 1} added");
                 }
             }
@@ -53,27 +61,14 @@ namespace QuizConfig.ViewModels
             this.ActivePack = this.QuestionPacks.First();
 
         }
+        #endregion
 
-        private void DeletePack(object? obj)
-        {
-            QuestionPacks.Remove(ActivePack);
-            if (QuestionPacks.Count > 0)
-                ActivePack = QuestionPacks.First();
-            else
-                ActivePack = null;
-        }
-
+        #region Methods
         private void SetActivePack(object? obj)
         {
             ActivePack = obj as QuestionPackModel;
             Debug.WriteLine($"{obj}");
         }
-
-        private void AddPack(object? obj)
-        {
-            QuestionPackModel newPack = new QuestionPackModel(new QuestionModel()) { Name = $"Added with button" };
-            QuestionPacks.Add(newPack);
-            ActivePack = newPack;
-        }
+        #endregion
     }
 }
