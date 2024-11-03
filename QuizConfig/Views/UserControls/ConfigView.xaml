@@ -104,8 +104,14 @@
             <StackPanel Grid.Column="0"
                         Grid.Row="1"
                         Orientation="Horizontal">
-                <Button Content="Add pack" />
-                <Button Content="Delete pack" />
+                <Button Content="Add pack"
+                        Margin="5"
+                        Padding="5"
+                        Command="{Binding ConfigVM.AddPackCMD}"/>
+                <Button Content="Delete pack"
+                        Margin="5"
+                        Padding="5"
+                        Command="{Binding ConfigVM.DeletePackCMD}"/>
             </StackPanel>
         </StackPanel>
 
@@ -113,7 +119,7 @@
                     Grid.Row="1"
                     Orientation="Vertical"
                     Margin="10,0,10,10"
-                    Visibility="{Binding}">
+                    Visibility="{Binding ConfigVM.QuestionFormVisibility}">
             <Label Content="Question:"
                    Padding="0" />
             <TextBox x:Name="QuestionTextBox"
