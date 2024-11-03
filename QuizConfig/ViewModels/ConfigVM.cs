@@ -13,7 +13,7 @@ namespace QuizConfig.ViewModels
 		private string _wrongAnswer1TextBox;
         private string _wrongAnswer2TextBox;
         private string _wrongAnswer3TextBox;
-        private Visibility _QuestionFormVisibility = Visibility.Visible;
+        private Visibility _QuestionFormVisibility = Visibility.Hidden;
         private Visibility _saveAndCloseButtonVisibility = Visibility.Visible;
         private Visibility _saveAndAddButtonVisibility = Visibility.Visible;
         private Visibility _updateButtonVisibility = Visibility.Collapsed;
@@ -21,11 +21,17 @@ namespace QuizConfig.ViewModels
         private int _selectedMenuItem;
         private QuestionModel _selectedQuestion;
 
-        public RelayCommand AddPackCMD { get; }
-        public RelayCommand DeletePackCMD { get; }
         #endregion
 
         #region Properties
+        public RelayCommand AddPackCMD { get; }
+        public RelayCommand DeletePackCMD { get; }
+        public RelayCommand QuestionFormVisibilityCMD { get; }
+        public RelayCommand SaveAndCloseButtonCMD { get; }
+        public RelayCommand SaveAndAddButtonCMD { get; }
+        public RelayCommand UpdateQuestionCMD { get; }
+        public RelayCommand CancelCMD { get; }
+        public RelayCommand DeleteQuestionCMD { get; }
         public string QuestionTextBox
 		{
 			get { return _questionTextBox; }
@@ -79,7 +85,12 @@ namespace QuizConfig.ViewModels
         public QuestionModel SelectedQuestion
         {
             get { return _selectedQuestion; }
-            set { _selectedQuestion = value; }
+            set 
+            { 
+                _selectedQuestion = value;
+                OnPropertyChanged();
+                QuestionFormVisibility = _selectedQuestion != null ? Visibility.Visible : Visibility.Hidden;
+            }
         }
         public int SelectedMenuItem
         {
@@ -96,11 +107,59 @@ namespace QuizConfig.ViewModels
 
             this.AddPackCMD = new RelayCommand(AddPack);
             this.DeletePackCMD = new RelayCommand(DeletePack);
+            this.QuestionFormVisibilityCMD = new RelayCommand(ChangeQuestionFormVisibility);
+            this.SaveAndCloseButtonCMD = new RelayCommand(AddQuestionAndClose);
+            this.SaveAndAddButtonCMD = new RelayCommand(AddQuestionAndClear);
+            this.UpdateQuestionCMD = new RelayCommand(UpdateQuestion);
+            this.CancelCMD = new RelayCommand(CancelInput);
+            this.DeleteQuestionCMD = new RelayCommand(DeleteQuestion, CanDeleteQuestion);
+        }
+
+        private void DeleteQuestion(object? obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        private bool CanDeleteQuestion(object? arg)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void CancelInput(object? obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void UpdateQuestion(object? obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void AddQuestionAndClear(object? obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void AddQuestionAndClose(object? obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void ChangeQuestionFormVisibility(object? obj)
+        {
+            throw new NotImplementedException();
         }
         #endregion
 
 
         #region Methods
+        private void AddPack(object? obj)
+        {
+            QuestionPackModel newPack = new QuestionPackModel() { Name = $"Added with button" };
+            _mainVM.QuestionPacks.Add(newPack);
+            _mainVM.ActivePack = newPack;
+        }
+
         private void DeletePack(object? obj)
         {
             _mainVM.QuestionPacks.Remove(_mainVM.ActivePack);
@@ -110,12 +169,6 @@ namespace QuizConfig.ViewModels
                 _mainVM.ActivePack = null;
         }
 
-        private void AddPack(object? obj)
-        {
-            QuestionPackModel newPack = new QuestionPackModel() { Name = $"Added with button" };
-            _mainVM.QuestionPacks.Add(newPack);
-            _mainVM.ActivePack = newPack;
-        }
         #endregion
     }
 }

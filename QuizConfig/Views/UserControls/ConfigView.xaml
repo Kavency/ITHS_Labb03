@@ -145,23 +145,22 @@
                 <Button Content="Save and Close"
                         Margin="10"
                         Padding="10"
-                        Command="{Binding}"
-                        Visibility="{Binding}" />
+                        Command="{Binding ConfigVM.SaveAndCloseButtonCMD}"
+                        Visibility="{Binding ConfigVM.SaveAndCloseButtonVisibility}" />
                 <Button Content="Save and Add more"
                         Margin="10"
                         Padding="10"
-                        Command="{Binding}"
-                        Visibility="{Binding}" />
+                        Command="{Binding ConfigVM.SaveAndAddButtonCMD}"
+                        Visibility="{Binding ConfigVM.SaveAndAddButtonVisibility}" />
                 <Button Content="Update"
                         Margin="10"
                         Padding="10"
-                        Command="{Binding}"
-                        Visibility="{Binding}" />
+                        Command="{Binding ConfigVM.UpdateQuestionCMD}"
+                        Visibility="{Binding ConfigVM.UpdateButtonVisibility}" />
                 <Button Content="Cancel"
                         Margin="10"
                         Padding="10"
-                        Command="{Binding}"
-                        Visibility="{Binding}" />
+                        Command="{Binding ConfigVM.CancelCMD}" />
             </StackPanel>
         </StackPanel>
     </Grid>
