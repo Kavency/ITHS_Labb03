@@ -18,6 +18,7 @@ namespace QuizConfig.ViewModels
         public MenuVM MenuVM { get; set; }
         public ConfigVM ConfigVM { get; }
         public ConfirmExitVM ConfirmExitVM { get; set; }
+        public FileHandler FileHandler { get; set; }
         public Visibility EditVisibility
         {
             get => _editVisibility;
@@ -44,32 +45,29 @@ namespace QuizConfig.ViewModels
             this.ConfigVM = new ConfigVM(this);
             this.ConfirmExitVM = new ConfirmExitVM(this);
             this.QuestionPacks = new ObservableCollection<QuestionPackModel>();
-
             this.SetActivePackCMD = new RelayCommand(SetActivePack);
 
+            this.FileHandler = new FileHandler(this);
+
+            this.FileHandler.LoadFromFile();
+
+
+            //for (int i = 0; i < 5; i++)
+            //{
+            //    QuestionPacks.Add(new QuestionPackModel() { Name = $"Pack {i + 1}" });
+            //    Debug.WriteLine($"{QuestionPacks[i].Name} was added.");
+            //    for (int j = 0; j < 5; j++)
+            //    {
+            //        QuestionPacks[i].Questions.Add(new QuestionModel("What year?", "1981", "1977", "1985","1976"));
+            //        Debug.WriteLine($"Question {j + 1} added");
+            //    }
+            //}
+
+            if (QuestionPacks is not null)
+                this.ActivePack = this.QuestionPacks.First();
+            else
+                this.ActivePack = null;
             
-            for (int i = 0; i < 5; i++)
-            {
-                QuestionPacks.Add(new QuestionPackModel() { Name = $"Pack {i + 1}" });
-                Debug.WriteLine($"{QuestionPacks[i].Name} was added.");
-                for (int j = 0; j < 5; j++)
-                {
-                    QuestionPacks[i].Questions.Add(new QuestionModel("What year?", "1981", "1977", "1985","1976"));
-                    Debug.WriteLine($"Question {j + 1} added");
-                }
-            }
-
-
-            this.ActivePack = this.QuestionPacks.First();
-            
-            this.MenuVM = new MenuVM(this);
-            this.ConfigVM = new ConfigVM(this);
-
-            this.SetActivePackCMD = new RelayCommand(SetActivePack);
-
-
-
-
         }
         #endregion
 

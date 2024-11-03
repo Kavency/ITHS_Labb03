@@ -87,7 +87,6 @@ namespace QuizConfig.ViewModels
             set 
             { 
                 _selectedQuestion = value;
-                OnPropertyChanged();
                 QuestionFormVisibility = _selectedQuestion != null ? Visibility.Visible : Visibility.Hidden;
                 SaveAndCloseButtonVisibility = _selectedQuestion != null ? Visibility.Collapsed : Visibility.Visible;
                 SaveAndAddButtonVisibility = _selectedQuestion != null ? Visibility.Collapsed : Visibility.Visible;
@@ -101,6 +100,7 @@ namespace QuizConfig.ViewModels
                     WrongAnswer2TextBox = _selectedQuestion.IncorrectAnswers[1];
                     WrongAnswer3TextBox = _selectedQuestion.IncorrectAnswers[2];
                 }
+                OnPropertyChanged();
             }
         }
         public int SelectedMenuItem
@@ -132,7 +132,7 @@ namespace QuizConfig.ViewModels
         private void DeleteQuestion(object? obj)
         {
             _mainVM.ActivePack.Questions.Remove(SelectedQuestion);
-            // Save to file...
+            _mainVM.FileHandler.SaveToFile();
         }
 
         private bool CanDeleteQuestion(object? arg)
@@ -158,7 +158,7 @@ namespace QuizConfig.ViewModels
             SelectedQuestion.IncorrectAnswers[0] = WrongAnswer1TextBox;
             SelectedQuestion.IncorrectAnswers[1] = WrongAnswer1TextBox;
             SelectedQuestion.IncorrectAnswers[2] = WrongAnswer2TextBox;
-            // TODO: Save to file
+            _mainVM.FileHandler.SaveToFile();
             CancelInput(obj);
         }
 
@@ -167,7 +167,7 @@ namespace QuizConfig.ViewModels
             // TODO: Check if textboxes are empty
             QuestionModel newQuestion = new QuestionModel(QuestionTextBox, CorrectAnswerTextBox, WrongAnswer1TextBox, WrongAnswer2TextBox, WrongAnswer3TextBox);
             _mainVM.ActivePack.Questions.Add(newQuestion);
-            // TODO: Save to file
+            _mainVM.FileHandler.SaveToFile();
             ClearTextBoxes();
         }
 
@@ -175,7 +175,7 @@ namespace QuizConfig.ViewModels
         {
             QuestionModel newQuestion = new QuestionModel(QuestionTextBox, CorrectAnswerTextBox, WrongAnswer1TextBox, WrongAnswer2TextBox, WrongAnswer3TextBox);
             _mainVM.ActivePack.Questions.Add(newQuestion);
-            // TODO: Save to file
+            _mainVM.FileHandler.SaveToFile();
             CancelInput(obj);
         }
 
@@ -189,6 +189,7 @@ namespace QuizConfig.ViewModels
             QuestionPackModel newPack = new QuestionPackModel() { Name = $"Added with button" };
             _mainVM.QuestionPacks.Add(newPack);
             _mainVM.ActivePack = newPack;
+            _mainVM.FileHandler.SaveToFile();
         }
 
         private void DeletePack(object? obj)
@@ -198,6 +199,8 @@ namespace QuizConfig.ViewModels
                 _mainVM.ActivePack = _mainVM.QuestionPacks.First();
             else
                 _mainVM.ActivePack = null;
+            _mainVM.FileHandler.SaveToFile();
+
         }
 
         private void ClearTextBoxes()
