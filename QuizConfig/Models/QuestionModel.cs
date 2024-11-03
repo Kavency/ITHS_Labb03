@@ -1,10 +1,11 @@
-﻿using QuizConfig.ViewModels;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace QuizConfig.Models
 {
-    internal class QuestionModel
+    internal class QuestionModel : Base
     {
+        private string _question;
+
         #region Properties
         [JsonPropertyName("type")]
         public string Type { get; set; }
@@ -19,7 +20,7 @@ namespace QuizConfig.Models
 
 
         [JsonPropertyName("question")]
-        public string Question { get; set; }
+        public string Question { get => _question; set { _question = value; OnPropertyChanged(); } }
 
 
         [JsonPropertyName("correct_answer")]
