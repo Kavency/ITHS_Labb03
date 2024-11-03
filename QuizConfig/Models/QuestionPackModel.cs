@@ -13,7 +13,10 @@ namespace QuizConfig.Models
 
 
         #region Constructors
-        public QuestionPackModel() { }
+        public QuestionPackModel()
+        {
+            this.Questions = new ObservableCollection<QuestionModel>();
+        }
 
         public QuestionPackModel(string name, int timeLimit = 30, string difficulty = "Medium")
         {
