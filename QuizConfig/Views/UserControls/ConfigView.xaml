@@ -24,15 +24,15 @@
               Grid.Column="0"
               Grid.Row="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <ComboBox Grid.Column="0"
                       Width="180"
-                      Margin="5"
-                      Padding="5"
                       HorizontalAlignment="Left"
                       VerticalAlignment="Center"
+                      Padding="5"
+                      Margin="5"
                       ItemsSource="{Binding QuestionPacks}"
                       SelectedItem="{Binding ActivePack}">
                 <ComboBox.ItemTemplate>
@@ -41,40 +41,122 @@
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
-            
+            <StackPanel Grid.Column="1"
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Right">
+                <Button Content="{fa:Icon list}"
+                        Padding="10,5"
+                        Margin="5"
+                        Command="{Binding}" />
+                <Button Content="{fa:Icon plus}"
+                        Padding="10,5"
+                        Margin="5"
+                        Command="{Binding}" />
+                <Button Content="{fa:Icon minus}"
+                        Padding="10,5"
+                        Margin="5"
+                        Command="{Binding}">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="IsEnabled"
+                                    Value="False" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding}"
+                                             Value="x:null">
+                                    <Setter Property="IsEnabled"
+                                            Value="False" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding}">
+                                    <Setter Property="IsEnabled"
+                                            Value="True" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+            </StackPanel>
         </Grid>
-        
-        
-        
+
         <StackPanel Grid.Column="0"
                     Grid.Row="1"
                     Orientation="Horizontal"
                     Margin="5">
-            
         </StackPanel>
 
-        <ListBox Grid.Column="0"
-                 Grid.Row="2"
-                 ItemsSource="{Binding QuestionPacks}"
-                 Margin="10">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Vertical">
-                        <TextBlock Text="Question:"
-                                   FontWeight="Bold" />
-                        <TextBlock Text="{Binding Name}" />
-                    </StackPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+        <StackPanel Grid.Column="0"
+                    Grid.Row="1"
+                    Orientation="Vertical">
+
+            <ListBox Grid.Column="0"
+                     Grid.Row="2"
+                     ItemsSource="{Binding ActivePack.Questions}"
+                     Margin="10,0">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="Question:"
+                                       FontWeight="Bold" />
+                            <TextBlock Text="{Binding Question}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <StackPanel Grid.Column="0"
+                        Grid.Row="1"
+                        Orientation="Horizontal">
+                <Button Content="Add pack" />
+                <Button Content="Delete pack" />
+            </StackPanel>
+        </StackPanel>
 
         <StackPanel Grid.Column="1"
-                    Grid.Row="2"
-                    Orientation="Vertical">
-            <Button Content="Add Pack"
-                    Command="{Binding AddPackCommand}" />
-            <Label Content="Active pack:" />
-            <Label Content="{Binding ActivePack.Name}" />
+                    Grid.Row="1"
+                    Orientation="Vertical"
+                    Margin="10,0,10,10"
+                    Visibility="{Binding}">
+            <Label Content="Question:"
+                   Padding="0" />
+            <TextBox x:Name="QuestionTextBox"
+                     Height="100"
+                     TextWrapping="Wrap"
+                     AcceptsReturn="True"
+                     Text="{}" />
+            <Label Content="Correct answer:"
+                   Padding="0,5,0,0" />
+            <TextBox Text="{}" />
+            <Label Content="Wrong answer 1:"
+                   Padding="0,5,0,0" />
+            <TextBox Text="{}" />
+            <Label Content="Wrong answer 2:"
+                   Padding="0,5,0,0" />
+            <TextBox Text="{}" />
+            <Label Content="Wrong answer 3:"
+                   Padding="0,5,0,0" />
+            <TextBox Text="{}" />
+
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center">
+                <Button Content="Save and Close"
+                        Margin="10"
+                        Padding="10"
+                        Command="{Binding}"
+                        Visibility="{Binding}" />
+                <Button Content="Save and Add more"
+                        Margin="10"
+                        Padding="10"
+                        Command="{Binding}"
+                        Visibility="{Binding}" />
+                <Button Content="Update"
+                        Margin="10"
+                        Padding="10"
+                        Command="{Binding}"
+                        Visibility="{Binding}" />
+                <Button Content="Cancel"
+                        Margin="10"
+                        Padding="10"
+                        Command="{Binding}"
+                        Visibility="{Binding}" />
+            </StackPanel>
         </StackPanel>
     </Grid>
 </UserControl>
