@@ -90,6 +90,18 @@ namespace QuizConfig.ViewModels
                 _selectedQuestion = value;
                 OnPropertyChanged();
                 QuestionFormVisibility = _selectedQuestion != null ? Visibility.Visible : Visibility.Hidden;
+                SaveAndCloseButtonVisibility = _selectedQuestion != null ? Visibility.Collapsed : Visibility.Visible;
+                SaveAndAddButtonVisibility = _selectedQuestion != null ? Visibility.Collapsed : Visibility.Visible;
+                UpdateButtonVisibility = _selectedQuestion != null ? Visibility.Visible : Visibility.Collapsed;
+
+                if(_selectedQuestion is not null)
+                {
+                    QuestionTextBox = _selectedQuestion.Question;
+                    CorrectAnswerTextBox = _selectedQuestion.CorrectAnswer;
+                    WrongAnswer1TextBox = _selectedQuestion.IncorrectAnswers[0];
+                    WrongAnswer2TextBox = _selectedQuestion.IncorrectAnswers[1];
+                    WrongAnswer3TextBox = _selectedQuestion.IncorrectAnswers[2];
+                }
             }
         }
         public int SelectedMenuItem
