@@ -22,8 +22,8 @@
                 <MenuItem Header="_File">
                     <MenuItem Header="Add question pack"
                               Icon="{fa:Icon file}"
-                              Command="{Binding AddPackCommand}"
-                              InputGestureText="Ctrl + n"/>
+                              Command="{Binding ConfigVM.AddPackCommand}"
+                              InputGestureText="Ctrl + n" />
 
                     <MenuItem Header="Select question pack"
                               Icon="{fa:Icon squarecheck}"
@@ -45,7 +45,7 @@
                     <MenuItem Header="Delete question pack"
                               Icon="{fa:Icon trashcan}"
                               InputGestureText="Ctrl + del"
-                              Command="{Binding DataContext.DeletePackCMD, RelativeSource={RelativeSource AncestorType=Window}}" />
+                              Command="{Binding DataContext.ConfigVM.DeletePackCMD, RelativeSource={RelativeSource AncestorType=Window}}" />
                     <Separator />
                     <MenuItem Header="Import questions"
                               Icon="{fa:Icon download}" />
@@ -53,6 +53,42 @@
                     <MenuItem Header="E_xit"
                               Icon="{fa:Icon righttobracket}"
                               InputGestureText="Ctrl + x" />
+                </MenuItem>
+                <MenuItem Header="View">
+                    <MenuItem Header="Edit"
+                              x:Name="EditMenuItem"
+                              Command="{Binding MenuVM.SwitchViewCMD}">
+                        <MenuItem.Style>
+                            <Style TargetType="MenuItem">
+                                <Setter Property="IsEnabled"
+                                        Value="True" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsEnabled, ElementName=PlayMenuItem}"
+                                                 Value="true">
+                                        <Setter Property="IsEnabled"
+                                                Value="False" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </MenuItem.Style>
+                    </MenuItem>
+                    <MenuItem Header="Play"
+                              x:Name="PlayMenuItem"
+                              Command="{Binding MenuVM.SwitchViewCMD}">
+                        <MenuItem.Style>
+                            <Style TargetType="MenuItem">
+                                <Setter Property="IsEnabled"
+                                        Value="True" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsEnabled, ElementName=EditMenuItem}"
+                                                 Value="true">
+                                        <Setter Property="IsEnabled"
+                                                Value="False" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </MenuItem.Style>
+                    </MenuItem>
                 </MenuItem>
             </Menu>
         </StackPanel>
