@@ -14,13 +14,9 @@ namespace QuizConfig.ViewModels
 
 
         public QuestionPackModel ActivePack
-        {
+        {   
             get => _activePack;
-            set
-            {
-                _activePack = value;
-                OnPropertyChanged();
-            }
+            set { _activePack = value; OnPropertyChanged(); }
         }
 
         public int SelectedMenuItem
@@ -47,6 +43,11 @@ namespace QuizConfig.ViewModels
             {
                 QuestionPacks.Add(new QuestionPackModel(new QuestionModel()) { Name = $"Pack {i + 1}" });
                 Debug.WriteLine($"{QuestionPacks[i].Name} was added.");
+                for (int j = 0; j < 5; j++)
+                {
+                    QuestionPacks[i].Questions.Add(new QuestionModel() { Question = $"Q {i + 1} - {j + 1}"});
+                    Debug.WriteLine($"Question {j + 1} added");
+                }
             }
 
             this.ActivePack = this.QuestionPacks.First();
