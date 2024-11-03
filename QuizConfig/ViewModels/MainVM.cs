@@ -17,6 +17,7 @@ namespace QuizConfig.ViewModels
         #region Properties
         public MenuVM MenuVM { get; set; }
         public ConfigVM ConfigVM { get; }
+        public ConfirmExitVM ConfirmExitVM { get; set; }
         public Visibility EditVisibility
         {
             get => _editVisibility;
@@ -41,6 +42,7 @@ namespace QuizConfig.ViewModels
         {
             this.MenuVM = new MenuVM(this);
             this.ConfigVM = new ConfigVM(this);
+            this.ConfirmExitVM = new ConfirmExitVM(this);
             this.QuestionPacks = new ObservableCollection<QuestionPackModel>();
 
             this.SetActivePackCMD = new RelayCommand(SetActivePack);
