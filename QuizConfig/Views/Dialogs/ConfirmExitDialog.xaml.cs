@@ -10,6 +10,7 @@ namespace QuizConfig.Views.Dialogs
         public ConfirmExitDialog()
         {
             InitializeComponent();
+            DataContext = ((MainWindow)Application.Current.MainWindow).DataContext;
         }
     }
 }

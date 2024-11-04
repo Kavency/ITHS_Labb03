@@ -44,7 +44,7 @@ namespace QuizConfig.ViewModels
         }
         private void SetActivePack(object? obj)
         {
-            MainVM.ActivePack = obj as QuestionPackModel;
+            MainVM.ActivePack = obj as QuestionPackVM;
             Debug.WriteLine($"{obj}");
         }
         private void ExitProgram(object? obj)

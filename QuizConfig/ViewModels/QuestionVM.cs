@@ -1,22 +1,50 @@
 ﻿using QuizConfig.Models;
+using System.Text.Json.Serialization;
 
 namespace QuizConfig.ViewModels
 {
     internal class QuestionVM : BaseVM
     {
-        private readonly QuestionModel _questionModel;
-
-        public string Type => _questionModel.Type;
-        public string Difficulty => _questionModel.Difficulty;
-        public string Category => _questionModel.Category;
-        public string Question => _questionModel.Question;
-        public string CorrectAnswer => _questionModel.CorrectAnswer;
-        public string[] IncorrectAnswers => _questionModel.IncorrectAnswers;
-
-
+        [JsonIgnore]
+        public QuestionModel QuestionModel { get; set; }
+   
+        public string Type
+        {
+            get => QuestionModel.Type;
+            set { QuestionModel.Type = value; OnPropertyChanged(); }
+        }
+        public string Difficulty
+        {
+            get => QuestionModel.Difficulty;
+            set { QuestionModel.Difficulty = value; OnPropertyChanged(); }
+        }
+        public string Category
+        {
+            get => QuestionModel.Category;
+            set { QuestionModel.Category = value; OnPropertyChanged(); }
+        }
+        public string Question
+        {
+            get => QuestionModel.Question;
+            set { QuestionModel.Question = value; OnPropertyChanged(); }
+        }
+        public string CorrectAnswer
+        {
+            get => QuestionModel.CorrectAnswer;
+            set { QuestionModel.CorrectAnswer = value; OnPropertyChanged(); }
+        }
+        public string[] IncorrectAnswers
+        {
+            get => QuestionModel.IncorrectAnswers;
+            set { QuestionModel.IncorrectAnswers = value; OnPropertyChanged(); }
+        }
+        public QuestionVM()
+        {
+            this.QuestionModel = new QuestionModel();
+        }
         public QuestionVM(QuestionModel questionModel)
         {
-            this._questionModel = questionModel;
+            this.QuestionModel = questionModel;
         }
     }
 }

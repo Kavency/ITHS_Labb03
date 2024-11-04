@@ -1,21 +1,37 @@
 ﻿using QuizConfig.Models;
 using System.Collections.ObjectModel;
+using System.Text.Json.Serialization;
 
 namespace QuizConfig.ViewModels
 {
     internal class QuestionPackVM
     {
-        private readonly QuestionPackModel _questionPackModel;
-
-        public string Name => _questionPackModel.Name;
-        public int TimeLimit => _questionPackModel.TimeLimit;
-        public string Difficulty => _questionPackModel.Difficulty;
-        public ObservableCollection<QuestionModel> Questions => _questionPackModel.Questions;
+        [JsonPropertyName("QuestionPackModel")]
+        public QuestionPackModel QuestionPackModel { get; set; }
 
 
+        [JsonPropertyName("Name")]
+        public string Name => QuestionPackModel.Name;
+
+
+        [JsonPropertyName("TimeLimit")]
+        public int TimeLimit => QuestionPackModel.TimeLimit;
+
+
+        [JsonPropertyName("Difficulty")]
+        public string Difficulty => QuestionPackModel.Difficulty;
+
+
+        [JsonPropertyName("Questions")]
+        public ObservableCollection<QuestionVM> Questions => QuestionPackModel.Questions;
+
+        public QuestionPackVM()
+        {
+            this.QuestionPackModel = new QuestionPackModel();
+        }
         public QuestionPackVM(QuestionPackModel questionPackModel)
         {
-            this._questionPackModel = questionPackModel;
+            this.QuestionPackModel = questionPackModel;
         }
     }
 }

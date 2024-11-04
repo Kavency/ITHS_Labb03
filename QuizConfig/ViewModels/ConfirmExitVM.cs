@@ -18,16 +18,15 @@ namespace QuizConfig.ViewModels
             CloseDialogCMD = new RelayCommand(CloseDialog);
         }
 
-        private void CloseDialog(object? obj)
-        {
-            Application.Current.Windows.OfType<ConfirmExitDialog>().FirstOrDefault()?.Close();
-        }
-
 
         private async void ExitProgram(object? obj)
         {
             await _mainVM.FileHandler.SaveToFileAsync();
-            Application.Current.Shutdown();
+            CloseDialog(obj);
+        }
+        private void CloseDialog(object? obj)
+        {
+            Application.Current.Windows.OfType<ConfirmExitDialog>().FirstOrDefault()?.Close();
         }
     }
 }

@@ -59,13 +59,16 @@
                 <MenuItem Header="_Edit">
                     <MenuItem Header="_Add"
                               Icon="{fa:Icon plus}"
-                              InputGestureText="Ctrl +"/>
+                              InputGestureText="Ctrl +"
+                              Command="{Binding ConfigVM.AddNewQuestionCMD}"/>
                     <MenuItem Header="_Remove"
                               Icon="{fa:Icon minus}"
-                              InputGestureText="Ctrl -"/>
+                              InputGestureText="Ctrl -"
+                              Command="{Binding ConfigVM.DeleteQuestionCMD}" />
                     <MenuItem Header="_Options"
                               Icon="{fa:Icon list}"
-                              InputGestureText="Ctrl o" />
+                              InputGestureText="Ctrl o"
+                              Command="{Binding OptionsDialogVM.OpenOptionsCMD}" />
                 </MenuItem>
                 
                 <MenuItem Header="View">

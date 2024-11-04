@@ -10,6 +10,7 @@
         Height="150"
         Width="250"
         WindowStartupLocation="CenterScreen">
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -26,11 +27,11 @@
             <Button Content="Yes"
                     Margin="15, 0"
                     Padding="15, 5"
-                    Command="{Binding DataContext.ExitProgramCMD, RelativeSource={RelativeSource AncestorType=Window}}" />
+                    Command="{Binding ConfirmExitVM.ExitProgramCMD}" />
             <Button Content="No"
                     Margin="15, 0"
                     Padding="15, 5"
-                    Command="{Binding DataContext.CloseDialogCMD, RelativeSource={RelativeSource AncestorType=Window}}" />
+                    Command="{Binding ConfirmExitVM.CloseDialogCMD}" />
         </StackPanel>
     </Grid>
 </Window>
