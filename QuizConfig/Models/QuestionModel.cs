@@ -4,7 +4,6 @@ namespace QuizConfig.Models
 {
     internal class QuestionModel
     {
-        private string _question;
 
         #region Properties
         [JsonPropertyName("type")]
@@ -20,7 +19,7 @@ namespace QuizConfig.Models
 
 
         [JsonPropertyName("question")]
-        public string Question { get => _question; set => _question = value; }
+        public string Question { get; set; }
 
 
         [JsonPropertyName("correct_answer")]
