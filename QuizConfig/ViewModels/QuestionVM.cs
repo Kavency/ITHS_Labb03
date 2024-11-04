@@ -1,4 +1,5 @@
-﻿using QuizConfig.Models;
+﻿using QuizConfig.MiscClasses;
+using QuizConfig.Models;
 using System.Text.Json.Serialization;
 
 namespace QuizConfig.ViewModels
@@ -13,7 +14,7 @@ namespace QuizConfig.ViewModels
             get => QuestionModel.Type;
             set { QuestionModel.Type = value; OnPropertyChanged(); }
         }
-        public string Difficulty
+        public Difficulty Difficulty
         {
             get => QuestionModel.Difficulty;
             set { QuestionModel.Difficulty = value; OnPropertyChanged(); }
