@@ -4,7 +4,7 @@ using System.Windows;
 
 namespace QuizConfig.ViewModels
 {
-    internal class MainVM : Base
+    internal class MainVM : BaseVM
     {
         #region Fields
         private QuestionPackModel _activePack;

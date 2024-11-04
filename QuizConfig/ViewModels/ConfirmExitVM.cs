@@ -4,7 +4,7 @@ using System.Windows;
 
 namespace QuizConfig.ViewModels
 {
-    internal class ConfirmExitVM : Base
+    internal class ConfirmExitVM : BaseVM
     {
         private readonly MainVM _mainVM;
         public RelayCommand ExitProgramCMD { get; }
@@ -24,9 +24,9 @@ namespace QuizConfig.ViewModels
         }
 
 
-        private void ExitProgram(object? obj)
+        private async void ExitProgram(object? obj)
         {
-            _mainVM.FileHandler.SaveToFile();
+            await _mainVM.FileHandler.SaveToFileAsync();
             Application.Current.Shutdown();
         }
     }
