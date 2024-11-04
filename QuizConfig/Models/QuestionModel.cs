@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using QuizConfig.MiscClasses;
+using System.Text.Json.Serialization;
 
 namespace QuizConfig.Models
 {
@@ -11,7 +12,8 @@ namespace QuizConfig.Models
 
 
         [JsonPropertyName("difficulty")]
-        public string Difficulty { get; set; }
+        [JsonConverter(typeof(JsonDifficultyConverter))]
+        public Difficulty Difficulty { get; set; }
 
 
         [JsonPropertyName("category")]
@@ -36,7 +38,7 @@ namespace QuizConfig.Models
 
         public QuestionModel(string question, string correctAnswer, string incorrectAnswer1,
             string incorrectAnswer2, string incorrectAnswer3, string type = "Multiple",
-            string difficulty = "Medium", string category = "General")
+            Difficulty difficulty = Difficulty.Medium, string category = "General")
         {
             this.Question = question;
             this.CorrectAnswer = correctAnswer;
