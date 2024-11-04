@@ -1,4 +1,5 @@
 ﻿using QuizConfig.Commands;
+using QuizConfig.MiscClasses;
 using QuizConfig.Models;
 using QuizConfig.Views.Dialogs;
 using System.Windows;
@@ -10,7 +11,7 @@ namespace QuizConfig.ViewModels
         public MainVM MainVM { get; }
 
         public string Name { get; set; }
-        public string Difficulty { get; set; } = "Medium";
+        public Difficulty Difficulty { get; set; } = Difficulty.Medium;
         public int TimeLimit { get; set; } = 30;
 
         public RelayCommand CreateCMD { get; }

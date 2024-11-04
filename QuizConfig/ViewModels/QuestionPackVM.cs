@@ -1,4 +1,5 @@
-﻿using QuizConfig.Models;
+﻿using QuizConfig.MiscClasses;
+using QuizConfig.Models;
 using System.Collections.ObjectModel;
 using System.Text.Json.Serialization;
 
@@ -19,7 +20,7 @@ namespace QuizConfig.ViewModels
 
 
         [JsonPropertyName("Difficulty")]
-        public string Difficulty => QuestionPackModel.Difficulty;
+        public Difficulty Difficulty => QuestionPackModel.Difficulty;
 
 
         [JsonPropertyName("Questions")]
