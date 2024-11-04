@@ -17,12 +17,12 @@ namespace QuizConfig
         }
 
 
-        public void LoadFromFile()
+        public async Task LoadFromFileAsync()
         {
             try
             {
                 string path = GetFullPath("Resources/Data/Data.json");
-                string jsonString = File.ReadAllText(path);
+                string jsonString = await File.ReadAllTextAsync(path);
                 var loadedPackList = JsonSerializer.Deserialize<ObservableCollection<QuestionPackModel>>(jsonString);
                 MainVM.QuestionPacks = loadedPackList;
 
@@ -39,13 +39,13 @@ namespace QuizConfig
         }
 
 
-        public void SaveToFile()
+        public async Task SaveToFileAsync()
         {
             try
             {
                 string jsonString = JsonSerializer.Serialize(MainVM.QuestionPacks);
                 string path = GetFullPath("Resources/Data/Data.json");
-                File.WriteAllText(path, jsonString);
+                await File.WriteAllTextAsync(path, jsonString);
                 Debug.WriteLine("File saved successfully!");
             }
             catch (JsonException e)

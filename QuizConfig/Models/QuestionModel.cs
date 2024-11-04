@@ -2,7 +2,7 @@
 
 namespace QuizConfig.Models
 {
-    internal class QuestionModel : Base
+    internal class QuestionModel
     {
         private string _question;
 
@@ -20,7 +20,7 @@ namespace QuizConfig.Models
 
 
         [JsonPropertyName("question")]
-        public string Question { get => _question; set { _question = value; OnPropertyChanged(); } }
+        public string Question { get => _question; set => _question = value; }
 
 
         [JsonPropertyName("correct_answer")]

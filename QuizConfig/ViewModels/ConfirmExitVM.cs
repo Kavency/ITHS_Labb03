@@ -1,4 +1,5 @@
 ﻿using QuizConfig.Commands;
+using QuizConfig.Views.Dialogs;
 using System.Windows;
 
 namespace QuizConfig.ViewModels
@@ -6,23 +7,27 @@ namespace QuizConfig.ViewModels
     internal class ConfirmExitVM : Base
     {
         private readonly MainVM _mainVM;
+        public RelayCommand ExitProgramCMD { get; }
+        public RelayCommand CloseDialogCMD { get; }
+        
+        
         public ConfirmExitVM(MainVM mainVM)
         {
             this._mainVM = mainVM;
-            ExitProgramCMD = new RelayCommand(Answer);
+            ExitProgramCMD = new RelayCommand(ExitProgram);
+            CloseDialogCMD = new RelayCommand(CloseDialog);
         }
 
-        public RelayCommand ExitProgramCMD { get; }
-
-        private void Answer(object? obj)
+        private void CloseDialog(object? obj)
         {
-            if (obj is Window window)
-                window.Close();
-            else
-            {
-                // TODO: Save to File
-                Application.Current.Shutdown();
-            }
+            Application.Current.Windows.OfType<ConfirmExitDialog>().FirstOrDefault()?.Close();
+        }
+
+
+        private void ExitProgram(object? obj)
+        {
+            _mainVM.FileHandler.SaveToFile();
+            Application.Current.Shutdown();
         }
     }
 }

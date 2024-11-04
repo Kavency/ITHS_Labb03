@@ -1,4 +1,5 @@
 ﻿using QuizConfig.Commands;
+using QuizConfig.Models;
 using QuizConfig.Views.Dialogs;
 using System.Diagnostics;
 using System.Windows;
@@ -12,6 +13,7 @@ namespace QuizConfig.ViewModels
         public MainVM MainVM { get; set; }
         public RelayCommand SwitchViewCMD { get; }
         public RelayCommand ExitProgramCMD { get; }
+        public RelayCommand SetActivePackCMD { get; private set; }
         #endregion
 
         #region Constructor
@@ -19,8 +21,9 @@ namespace QuizConfig.ViewModels
         {
             this.MainVM = mainVM;
 
-            SwitchViewCMD = new RelayCommand(SwitchView);
-            ExitProgramCMD = new RelayCommand(ExitProgram);
+            this.SwitchViewCMD = new RelayCommand(SwitchView);
+            this.SetActivePackCMD = new RelayCommand(SetActivePack);
+            this.ExitProgramCMD = new RelayCommand(ExitProgram);
         }
 
         #endregion
@@ -28,8 +31,6 @@ namespace QuizConfig.ViewModels
         #region Methods
         private void SwitchView(object? obj)
         {
-            MenuItem menuItem = obj as MenuItem;
-
             if (MainVM.EditVisibility == Visibility.Visible)
             {
                 MainVM.EditVisibility = Visibility.Collapsed;
@@ -41,10 +42,13 @@ namespace QuizConfig.ViewModels
                 MainVM.PlayVisibility = Visibility.Collapsed;
             }
         }
-
+        private void SetActivePack(object? obj)
+        {
+            MainVM.ActivePack = obj as QuestionPackModel;
+            Debug.WriteLine($"{obj}");
+        }
         private void ExitProgram(object? obj)
         {
-            //throw new NotImplementedException();
             ConfirmExitDialog exitDialog = new ConfirmExitDialog();
             exitDialog.Owner = Application.Current.MainWindow;
             exitDialog.ShowDialog();

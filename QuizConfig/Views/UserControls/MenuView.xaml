@@ -35,7 +35,7 @@
                                 <Setter Property="Icon"
                                         Value="{fa:Icon clipboardquestion}" />
                                 <Setter Property="Command"
-                                        Value="{Binding DataContext.SetActivePackCMD, RelativeSource={RelativeSource AncestorType=Window}}" />
+                                        Value="{Binding DataContext.MenuVM.SetActivePackCMD, RelativeSource={RelativeSource AncestorType=Window}}" />
                                 <Setter Property="CommandParameter"
                                         Value="{Binding}" />
                             </Style>

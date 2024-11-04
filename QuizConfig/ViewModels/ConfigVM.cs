@@ -129,10 +129,10 @@ namespace QuizConfig.ViewModels
 
 
         #region Methods
-        private void DeleteQuestion(object? obj)
+        private async void DeleteQuestion(object? obj)
         {
             _mainVM.ActivePack.Questions.Remove(SelectedQuestion);
-            _mainVM.FileHandler.SaveToFile();
+            await _mainVM.FileHandler.SaveToFileAsync();
         }
 
         private bool CanDeleteQuestion(object? arg)
@@ -151,31 +151,31 @@ namespace QuizConfig.ViewModels
             SelectedQestionIndex = null;
         }
 
-        private void UpdateQuestion(object? obj)
+        private async void UpdateQuestion(object? obj)
         {
             SelectedQuestion.Question = QuestionTextBox;
             SelectedQuestion.CorrectAnswer = CorrectAnswerTextBox;
             SelectedQuestion.IncorrectAnswers[0] = WrongAnswer1TextBox;
             SelectedQuestion.IncorrectAnswers[1] = WrongAnswer1TextBox;
             SelectedQuestion.IncorrectAnswers[2] = WrongAnswer2TextBox;
-            _mainVM.FileHandler.SaveToFile();
+            await _mainVM.FileHandler.SaveToFileAsync();
             CancelInput(obj);
         }
 
-        private void AddQuestionAndClear(object? obj)
+        private async void AddQuestionAndClear(object? obj)
         {
             // TODO: Check if textboxes are empty
             QuestionModel newQuestion = new QuestionModel(QuestionTextBox, CorrectAnswerTextBox, WrongAnswer1TextBox, WrongAnswer2TextBox, WrongAnswer3TextBox);
             _mainVM.ActivePack.Questions.Add(newQuestion);
-            _mainVM.FileHandler.SaveToFile();
+            await _mainVM.FileHandler.SaveToFileAsync();
             ClearTextBoxes();
         }
 
-        private void AddQuestionAndClose(object? obj)
+        private async void AddQuestionAndClose(object? obj)
         {
             QuestionModel newQuestion = new QuestionModel(QuestionTextBox, CorrectAnswerTextBox, WrongAnswer1TextBox, WrongAnswer2TextBox, WrongAnswer3TextBox);
             _mainVM.ActivePack.Questions.Add(newQuestion);
-            _mainVM.FileHandler.SaveToFile();
+            await _mainVM.FileHandler.SaveToFileAsync();
             CancelInput(obj);
         }
 
@@ -184,22 +184,22 @@ namespace QuizConfig.ViewModels
             throw new NotImplementedException();
         }
 
-        private void AddPack(object? obj)
+        private async void AddPack(object? obj)
         {
             QuestionPackModel newPack = new QuestionPackModel() { Name = $"Added with button" };
             _mainVM.QuestionPacks.Add(newPack);
             _mainVM.ActivePack = newPack;
-            _mainVM.FileHandler.SaveToFile();
+            await _mainVM.FileHandler.SaveToFileAsync();
         }
 
-        private void DeletePack(object? obj)
+        private async void DeletePack(object? obj)
         {
             _mainVM.QuestionPacks.Remove(_mainVM.ActivePack);
             if (_mainVM.QuestionPacks.Count > 0)
                 _mainVM.ActivePack = _mainVM.QuestionPacks.First();
             else
                 _mainVM.ActivePack = null;
-            _mainVM.FileHandler.SaveToFile();
+            await _mainVM.FileHandler.SaveToFileAsync();
 
         }
 
