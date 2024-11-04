@@ -1,4 +1,5 @@
 ﻿using QuizConfig.Commands;
+using QuizConfig.MiscClasses;
 using QuizConfig.Models;
 using QuizConfig.Views.Dialogs;
 using System.Windows;
@@ -10,7 +11,7 @@ namespace QuizConfig.ViewModels
         public MainVM MainVM { get; set; }
 
         public string Name { get; set; }
-        public string Difficulty { get; set; }
+        public Difficulty Difficulty { get; set; }
         public int TimeLimit { get; set; }
         public RelayCommand OpenOptionsCMD { get; }
         public RelayCommand UpdateCMD { get; }
@@ -27,7 +28,6 @@ namespace QuizConfig.ViewModels
         }
 
 
-
         private void OpenOptions(object? obj)
         {
             Name = MainVM.ActivePack.Name;
@@ -37,6 +37,7 @@ namespace QuizConfig.ViewModels
             OptionsDialog optionsDialog = new OptionsDialog();
             optionsDialog.ShowDialog();
         }
+
 
         private async void Update(object? obj)
         {
