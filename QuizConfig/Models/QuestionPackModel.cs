@@ -6,9 +6,8 @@ namespace QuizConfig.Models
 {
     internal class QuestionPackModel : BaseVM
     {
-        private string _name;
         #region Properties
-        public string Name { get => _name; set { _name = value; OnPropertyChanged(); } }
+        public string Name { get; set; }
         public int TimeLimit { get; set; }
         public string Difficulty { get; set; }
         public ObservableCollection<QuestionModel> Questions { get; set; }
