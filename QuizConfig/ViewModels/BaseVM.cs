@@ -3,9 +3,9 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 
-namespace QuizConfig
+namespace QuizConfig.ViewModels
 {
-    internal class Base : INotifyPropertyChanged
+    internal class BaseVM : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler? PropertyChanged;
 
