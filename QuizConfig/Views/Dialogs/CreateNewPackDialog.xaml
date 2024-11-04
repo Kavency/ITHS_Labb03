@@ -1,0 +1,68 @@
+﻿<Window x:Class="QuizConfig.Views.Dialogs.CreateNewPackDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QuizConfig.Views.Dialogs"
+        mc:Ignorable="d"
+        Title="Create New Pack"
+        Height="250"
+        Width="200"
+        BorderThickness="2,2,2,2"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen">
+    
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Label Content="Add new pack"
+               Grid.Row="0"
+               HorizontalAlignment="Center"
+               Padding="0" />
+        <Separator Grid.Row="0"
+                   VerticalAlignment="Bottom" />
+        <StackPanel Orientation="Vertical"
+                    Grid.Row="1">
+            <Label Content="Pack name:" />
+            <TextBox Text="{Binding CreatePackVM.Name}" />
+            <Label Content="Difficulty:" />
+            <ComboBox>
+                <ComboBoxItem Content="Easy" />
+                <ComboBoxItem Content="Medium"
+                              IsSelected="True" />
+                <ComboBoxItem Content="Hard" />
+            </ComboBox>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Time limit:"
+                       HorizontalAlignment="Left" />
+                <Label Content="{Binding ElementName=Slider, Path=Value, UpdateSourceTrigger=PropertyChanged}"
+                       HorizontalAlignment="Center" />
+                <Label Content="Seconds"
+                       HorizontalAlignment="Right" />
+
+            </StackPanel>
+            <Slider x:Name="Slider"
+                    Minimum="5"
+                    Maximum="120"
+                    Value="{Binding CreatePackVM.TimeLimit}"
+                    TickFrequency="5"
+                    IsSnapToTickEnabled="True"
+                    TickPlacement="BottomRight" />
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center">
+                <Button Content="Create"
+                        Command="{Binding CreatePackVM.CreateCMD}"
+                        Margin="5"
+                        Padding="5" />
+                <Button Content="Cancel"
+                        Command="{Binding CreatePackVM.CancelCMD}"
+                        Margin="5"
+                        Padding="5" />
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+
+</Window>

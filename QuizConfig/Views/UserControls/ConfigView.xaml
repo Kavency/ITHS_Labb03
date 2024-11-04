@@ -47,33 +47,15 @@
                 <Button Content="{fa:Icon list}"
                         Padding="10,5"
                         Margin="5"
-                        Command="{Binding}" />
+                        Command="{Binding OptionsDialogVM.OpenOptionsCMD}" />
                 <Button Content="{fa:Icon plus}"
                         Padding="10,5"
                         Margin="5"
-                        Command="{Binding}" />
+                        Command="{Binding ConfigVM.AddNewQuestionCMD}" />
                 <Button Content="{fa:Icon minus}"
                         Padding="10,5"
                         Margin="5"
-                        Command="{Binding}">
-                    <Button.Style>
-                        <Style TargetType="Button">
-                            <Setter Property="IsEnabled"
-                                    Value="False" />
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding}"
-                                             Value="x:null">
-                                    <Setter Property="IsEnabled"
-                                            Value="False" />
-                                </DataTrigger>
-                                <DataTrigger Binding="{Binding}">
-                                    <Setter Property="IsEnabled"
-                                            Value="True" />
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Button.Style>
-                </Button>
+                        Command="{Binding ConfigVM.DeleteQuestionCMD}" />
             </StackPanel>
         </Grid>
 

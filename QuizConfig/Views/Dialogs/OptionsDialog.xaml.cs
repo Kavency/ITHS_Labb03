@@ -3,11 +3,11 @@
 namespace QuizConfig.Views.Dialogs
 {
     /// <summary>
-    /// Interaction logic for ConfirmExitDialog.xaml
+    /// Interaction logic for OptionsDialog.xaml
     /// </summary>
-    public partial class ConfirmExitDialog : Window
+    public partial class OptionsDialog : Window
     {
-        public ConfirmExitDialog()
+        public OptionsDialog()
         {
             InitializeComponent();
             DataContext = ((MainWindow)Application.Current.MainWindow).DataContext;

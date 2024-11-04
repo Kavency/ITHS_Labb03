@@ -1,28 +1,32 @@
 ﻿using QuizConfig.Commands;
+using QuizConfig.Views.Dialogs;
 using System.Windows;
 
 namespace QuizConfig.ViewModels
 {
-    internal class ConfirmExitVM : Base
+    internal class ConfirmExitVM : BaseVM
     {
         private readonly MainVM _mainVM;
+        public RelayCommand ExitProgramCMD { get; }
+        public RelayCommand CloseDialogCMD { get; }
+        
+        
         public ConfirmExitVM(MainVM mainVM)
         {
             this._mainVM = mainVM;
-            ExitProgramCMD = new RelayCommand(Answer);
+            ExitProgramCMD = new RelayCommand(ExitProgram);
+            CloseDialogCMD = new RelayCommand(CloseDialog);
         }
 
-        public RelayCommand ExitProgramCMD { get; }
 
-        private void Answer(object? obj)
+        private async void ExitProgram(object? obj)
         {
-            if (obj is Window window)
-                window.Close();
-            else
-            {
-                // TODO: Save to File
-                Application.Current.Shutdown();
-            }
+            await _mainVM.FileHandler.SaveToFileAsync();
+            CloseDialog(obj);
+        }
+        private void CloseDialog(object? obj)
+        {
+            Application.Current.Windows.OfType<ConfirmExitDialog>().FirstOrDefault()?.Close();
         }
     }
 }
