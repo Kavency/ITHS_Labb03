@@ -9,21 +9,25 @@ namespace QuizConfig.MiscClasses
     internal class FileHandler
     {
         public MainVM MainVM { get; set; }
+        public JsonSerializerOptions Options { get; set; }
 
         public FileHandler(MainVM mainWindowViewModel)
         {
             MainVM = mainWindowViewModel;
+
+            Options = new JsonSerializerOptions { Converters = { new JsonDifficultyConverter() } };
         }
 
 
         public async Task LoadFromFileAsync()
         {
+
             try
             {
                 string path = GetFullPath("Resources/Data/Data.json");
 
                 string jsonString = await File.ReadAllTextAsync(path);
-                var loadedPackList = JsonSerializer.Deserialize<ObservableCollection<QuestionPackVM>>(jsonString);
+                var loadedPackList = JsonSerializer.Deserialize<ObservableCollection<QuestionPackVM>>(jsonString, Options);
                 MainVM.QuestionPacks = loadedPackList;
 
                 Debug.WriteLine("Data loaded successfully.");
@@ -43,7 +47,7 @@ namespace QuizConfig.MiscClasses
         {
             try
             {
-                string jsonString = JsonSerializer.Serialize(MainVM.QuestionPacks);
+                string jsonString = JsonSerializer.Serialize(MainVM.QuestionPacks, Options);
                 string path = GetFullPath("Resources/Data/Data.json");
                 await File.WriteAllTextAsync(path, jsonString);
                 Debug.WriteLine("File saved successfully!");
