@@ -1,11 +1,10 @@
-﻿using QuizConfig.Models;
-using QuizConfig.ViewModels;
+﻿using QuizConfig.ViewModels;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Text.Json;
 
-namespace QuizConfig
+namespace QuizConfig.MiscClasses
 {
     internal class FileHandler
     {
@@ -13,7 +12,7 @@ namespace QuizConfig
 
         public FileHandler(MainVM mainWindowViewModel)
         {
-            this.MainVM = mainWindowViewModel;
+            MainVM = mainWindowViewModel;
         }
 
 
@@ -22,8 +21,9 @@ namespace QuizConfig
             try
             {
                 string path = GetFullPath("Resources/Data/Data.json");
+
                 string jsonString = await File.ReadAllTextAsync(path);
-                var loadedPackList = JsonSerializer.Deserialize<ObservableCollection<QuestionPackModel>>(jsonString);
+                var loadedPackList = JsonSerializer.Deserialize<ObservableCollection<QuestionPackVM>>(jsonString);
                 MainVM.QuestionPacks = loadedPackList;
 
                 Debug.WriteLine("Data loaded successfully.");
