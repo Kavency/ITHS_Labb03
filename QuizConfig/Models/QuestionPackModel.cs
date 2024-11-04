@@ -1,6 +1,6 @@
 ﻿using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Text.Json.Serialization;
+using QuizConfig.MiscClasses;
 using QuizConfig.ViewModels;
 
 namespace QuizConfig.Models
@@ -17,7 +17,8 @@ namespace QuizConfig.Models
 
 
         [JsonPropertyName("Difficulty")]
-        public string Difficulty { get; set; }
+        [JsonConverter(typeof(JsonDifficultyConverter))]
+        public Difficulty Difficulty { get; set; }
 
 
         [JsonPropertyName("Questions")]
@@ -31,7 +32,7 @@ namespace QuizConfig.Models
             this.Questions = new ObservableCollection<QuestionVM>();
         }
 
-        public QuestionPackModel(string name, int timeLimit = 30, string difficulty = "Medium")
+        public QuestionPackModel(string name, int timeLimit = 30, Difficulty difficulty = Difficulty.Medium)
         {
             this.Questions = new ObservableCollection<QuestionVM>();
 
