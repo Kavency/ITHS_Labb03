@@ -8,8 +8,8 @@ namespace QuizConfig.ViewModels
     {
         #region Fields
         private QuestionPackVM _activePack;
-        private Visibility _editVisibility = Visibility.Visible;
-        private Visibility _playVisibility = Visibility.Collapsed;
+        private Visibility _editVisibility = Visibility.Collapsed;
+        private Visibility _playVisibility = Visibility.Visible;
         #endregion
 
         #region Properties
