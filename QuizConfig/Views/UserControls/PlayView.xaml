@@ -109,8 +109,10 @@
                          Grid.Row="3"
                          Grid.ColumnSpan="2"
                          Margin="25"
-                         Height="30"
-                         Value="100" />
+                         Height="30" 
+                         Width="300"
+                         d:Value="100"
+                         Value="{Binding PlayVM.TimerProgress}"/>
         </Grid>
     </Grid>
 </UserControl>
