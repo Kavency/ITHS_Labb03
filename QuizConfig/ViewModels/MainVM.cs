@@ -42,7 +42,7 @@ namespace QuizConfig.ViewModels
         {
             this.QuestionPacks = new ObservableCollection<QuestionPackVM>();
             this.FileHandler = new FileHandler(this);
-            this.FileHandler.LoadFromFileAsync().Wait(2000); // TODO: Not the best way to await the async.
+            this.FileHandler.LoadFromFileAsync().Wait(500); // TODO: Not the best way to await the async.
 
             if (QuestionPacks is not null)
                 this.ActivePack = this.QuestionPacks.FirstOrDefault();

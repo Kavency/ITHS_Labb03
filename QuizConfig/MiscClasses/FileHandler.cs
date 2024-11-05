@@ -1,4 +1,5 @@
-﻿using QuizConfig.ViewModels;
+﻿using QuizConfig.Models;
+using QuizConfig.ViewModels;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
@@ -8,14 +9,15 @@ namespace QuizConfig.MiscClasses
 {
     internal class FileHandler
     {
-        public MainVM MainVM { get; set; }
-        public JsonSerializerOptions Options { get; set; }
+        private string _path;
+        private JsonSerializerOptions _options;
+
+        public MainVM MainVM { get; }
 
         public FileHandler(MainVM mainWindowViewModel)
         {
             MainVM = mainWindowViewModel;
-
-            Options = new JsonSerializerOptions { Converters = { new JsonDifficultyConverter() } };
+            _options = new JsonSerializerOptions { Converters = { new JsonDifficultyConverter() } };
         }
 
 
@@ -24,10 +26,10 @@ namespace QuizConfig.MiscClasses
 
             try
             {
-                string path = GetFullPath("Resources/Data/Data.json");
+                _path = GetFullPath("Resources/Data/Data.json");
 
-                string jsonString = await File.ReadAllTextAsync(path);
-                var loadedPackList = JsonSerializer.Deserialize<ObservableCollection<QuestionPackVM>>(jsonString, Options);
+                string jsonString = await File.ReadAllTextAsync(_path);
+                var loadedPackList = JsonSerializer.Deserialize<ObservableCollection<QuestionPackVM>>(jsonString, _options);
                 MainVM.QuestionPacks = loadedPackList;
 
                 Debug.WriteLine("Data loaded successfully.");
@@ -38,6 +40,10 @@ namespace QuizConfig.MiscClasses
             }
             catch (Exception e)
             {
+                MainVM.QuestionPacks.Add(new QuestionPackVM(new QuestionPackModel("Demo pack")));
+                MainVM.QuestionPacks[0].Questions.Add(new QuestionVM(new QuestionModel("Is this a demo question?",
+                    "Yes, it is.", "No, I don't think so.", "It's a trick question, not a demo.", "What was the question again?")));
+
                 Debug.WriteLine($"Error loading file: {e.Message}");
             }
         }
@@ -47,7 +53,7 @@ namespace QuizConfig.MiscClasses
         {
             try
             {
-                string jsonString = JsonSerializer.Serialize(MainVM.QuestionPacks, Options);
+                string jsonString = JsonSerializer.Serialize(MainVM.QuestionPacks, _options);
                 string path = GetFullPath("Resources/Data/Data.json");
                 await File.WriteAllTextAsync(path, jsonString);
                 Debug.WriteLine("File saved successfully!");
