@@ -19,6 +19,7 @@ namespace QuizConfig.ViewModels
         public FileHandler FileHandler { get; set; }
         public CreatePackVM CreatePackVM { get; set; }
         public OptionsDialogVM OptionsDialogVM { get; set; }
+        public PlayVM PlayVM { get; set; }
         public Visibility EditVisibility
         {
             get => _editVisibility;
@@ -55,7 +56,7 @@ namespace QuizConfig.ViewModels
             this.ConfirmExitVM = new ConfirmExitVM(this);
             this.CreatePackVM = new CreatePackVM(this);
             this.OptionsDialogVM = new OptionsDialogVM(this);
-
+            this.PlayVM = new PlayVM(this);
 
             // Hardcoded data
             //QuestionPacks.Add(new QuestionPackVM(new QuestionPackModel("Pack01")));
