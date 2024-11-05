@@ -10,7 +10,8 @@
              Background="White">
     <Grid HorizontalAlignment="Center"
           VerticalAlignment="Center">
-        <Grid Visibility="Visible"
+        <Grid Visibility="{Binding PlayVM.ResultVisibility}"
+              d:Visibility="Collapsed"
               Margin="20">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -38,10 +39,11 @@
                     FontSize="18"
                     Margin="25"
                     Padding="25,5"
-                    Content="Go again"/>
+                    Content="Go again" />
         </Grid>
 
-        <Grid Visibility="Collapsed"
+        <Grid Visibility="{Binding PlayVM.QuizVisibility}"
+              d:Visibility="Visible"
               Margin="20"
               HorizontalAlignment="Center"
               VerticalAlignment="Center">
@@ -56,7 +58,8 @@
                 <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
 
-            <TextBlock Text="Question goes here and should be able to have a lot of text and wrap around."
+            <TextBlock Text="{Binding PlayVM.CurrentQuestion}"
+                       d:Text="Question goes here and should be able to have a lot of text and wrap around."
                        FontSize="18"
                        TextWrapping="Wrap"
                        Grid.Column="0"
@@ -67,7 +70,7 @@
                        MaxWidth="400" />
             <Label Grid.Column="0"
                    Grid.Row="1"
-                   Content="Question n of n" />
+                   d:Content="Question n of n" />
 
             <Grid Grid.Column="0"
                   Grid.Row="2"
@@ -82,24 +85,24 @@
                 </Grid.RowDefinitions>
                 <Button Grid.Column="0"
                         Grid.Row="0"
-                        Content="Answer 1"
                         Padding="10"
-                        Margin="5" />
+                        Margin="5"
+                        d:Content="Answer 1" />
                 <Button Grid.Column="1"
                         Grid.Row="0"
-                        Content="Answer 2"
                         Padding="10"
-                        Margin="5" />
+                        Margin="5"
+                        d:Content="Answer 2" />
                 <Button Grid.Column="0"
                         Grid.Row="1"
-                        Content="Answer 3"
                         Padding="10"
-                        Margin="5" />
+                        Margin="5"
+                        d:Content="Answer 3" />
                 <Button Grid.Column="1"
                         Grid.Row="1"
-                        Content="Answer 4"
                         Padding="10"
-                        Margin="5" />
+                        Margin="5"
+                        d:Content="Answer 4" />
             </Grid>
 
             <ProgressBar Grid.Column="0"
