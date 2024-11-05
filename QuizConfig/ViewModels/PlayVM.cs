@@ -8,22 +8,28 @@ namespace QuizConfig.ViewModels
         private DispatcherTimer _timer;
         private int _timeLimit;
         private int _elapsedTime;
-        private int timerProgress = 100;
+        private int _timerProgress = 100;
+        private QuestionVM _currentQuestion;
 
         public MainVM MainVM { get; set; }
-        public QuestionPackVM QuizQestions { get => MainVM.ActivePack; private set { } }
-        public QuestionVM CurrentQuestion { get; set; }
+        public QuestionPackVM QuizQuestions { get => MainVM.ActivePack; private set { } }
+        public QuestionVM CurrentQuestion { get => _currentQuestion; set { _currentQuestion = value; OnPropertyChanged(); } }
         public Visibility ResultVisibility { get; set; } = Visibility.Collapsed;
         public Visibility QuizVisibility { get; set; } = Visibility.Visible;
-        public int TimerProgress { get => timerProgress; set { timerProgress = value; OnPropertyChanged(); } }
+        public int TimerProgress { get => _timerProgress; set { _timerProgress = value; OnPropertyChanged(); } }
 
         public PlayVM(MainVM mainVM)
         {
             this.MainVM = mainVM;
             InitializeTimer(30);
+            DisplayQuestion();
+
         }
 
-
+        private void DisplayQuestion()
+        {
+            CurrentQuestion = QuizQuestions.Questions[0];
+        }
 
 
         private void InitializeTimer(int totalSeconds)
