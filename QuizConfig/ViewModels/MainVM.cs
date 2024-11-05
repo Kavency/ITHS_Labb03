@@ -8,8 +8,8 @@ namespace QuizConfig.ViewModels
     {
         #region Fields
         private QuestionPackVM _activePack;
-        private Visibility _editVisibility = Visibility.Visible;
-        private Visibility _playVisibility = Visibility.Collapsed;
+        private Visibility _editVisibility = Visibility.Collapsed;
+        private Visibility _playVisibility = Visibility.Visible;
         #endregion
 
         #region Properties
@@ -19,6 +19,7 @@ namespace QuizConfig.ViewModels
         public FileHandler FileHandler { get; set; }
         public CreatePackVM CreatePackVM { get; set; }
         public OptionsDialogVM OptionsDialogVM { get; set; }
+        public PlayVM PlayVM { get; set; }
         public Visibility EditVisibility
         {
             get => _editVisibility;
@@ -50,7 +51,7 @@ namespace QuizConfig.ViewModels
             this.ConfirmExitVM = new ConfirmExitVM(this);
             this.CreatePackVM = new CreatePackVM(this);
             this.OptionsDialogVM = new OptionsDialogVM(this);
-
+            this.PlayVM = new PlayVM(this);
 
             // Hardcoded data
             //QuestionPacks.Add(new QuestionPackVM(new QuestionPackModel("Pack01")));
