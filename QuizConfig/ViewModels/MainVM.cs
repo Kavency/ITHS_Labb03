@@ -42,13 +42,8 @@ namespace QuizConfig.ViewModels
         {
             this.QuestionPacks = new ObservableCollection<QuestionPackVM>();
             this.FileHandler = new FileHandler(this);
-            this.FileHandler.LoadFromFileAsync().Wait(500); // TODO: Not the best way to await the async.
-
-            if (QuestionPacks is not null)
-                this.ActivePack = this.QuestionPacks.FirstOrDefault();
-            else
-                this.ActivePack = null;
-
+            //this.FileHandler.LoadFromFileAsync().Wait(500); // TODO: Not the best way to await the async.
+            WaitForLoadToComplete();
 
             this.MenuVM = new MenuVM(this);
             this.ConfigVM = new ConfigVM(this);
@@ -71,5 +66,15 @@ namespace QuizConfig.ViewModels
             //QuestionPacks[4].Questions.Add(new QuestionVM(new QuestionModel("What year is it?", "2024", "1998", "2004", "1824")));
         }
         #endregion
+
+        private async void WaitForLoadToComplete()
+        {
+            await FileHandler.LoadFromFileAsync();
+            
+            if (QuestionPacks is not null)
+                this.ActivePack = this.QuestionPacks[0];
+            else
+                this.ActivePack = null;
+        }
     }
 }
