@@ -40,7 +40,6 @@ namespace QuizConfig.ViewModels
             Difficulty = MainVM.ActivePack.Difficulty;
             SelectedDifficulty = MainVM.ActivePack.Difficulty;
             TimeLimit = MainVM.ActivePack.TimeLimit;
-            //EnumConverter enumConverter = new EnumConverter();
 
             OptionsDialog optionsDialog = new OptionsDialog();
             optionsDialog.ShowDialog();
@@ -49,8 +48,9 @@ namespace QuizConfig.ViewModels
 
         private async void Update(object? obj)
         {
-            QuestionPackVM newPack = new QuestionPackVM(new QuestionPackModel(Name, TimeLimit, SelectedDifficulty));
-            MainVM.ActivePack = newPack;
+            this.MainVM.ActivePack.Name = Name;
+            this.MainVM.ActivePack.Difficulty = Difficulty;
+            this.MainVM.ActivePack.TimeLimit = TimeLimit;
             await MainVM.FileHandler.SaveToFileAsync();
             Cancel(obj);
         }
