@@ -12,6 +12,7 @@ namespace QuizConfig.ViewModels
         private Visibility _playVisibility = Visibility.Visible;
         #endregion
 
+
         #region Properties
         public MenuVM MenuVM { get; set; }
         public ConfigVM ConfigVM { get; }
@@ -38,12 +39,12 @@ namespace QuizConfig.ViewModels
         }
         #endregion
 
+
         #region Constructor
         public MainVM()
         {
             this.QuestionPacks = new ObservableCollection<QuestionPackVM>();
             this.FileHandler = new FileHandler(this);
-            //this.FileHandler.LoadFromFileAsync().Wait(500); // TODO: Not the best way to await the async.
             WaitForLoadToComplete();
 
             this.MenuVM = new MenuVM(this);
@@ -52,22 +53,11 @@ namespace QuizConfig.ViewModels
             this.CreatePackVM = new CreatePackVM(this);
             this.OptionsDialogVM = new OptionsDialogVM(this);
             this.PlayVM = new PlayVM(this);
-
-            // Hardcoded data
-            //QuestionPacks.Add(new QuestionPackVM(new QuestionPackModel("Pack01")));
-            //QuestionPacks.Add(new QuestionPackVM(new QuestionPackModel("Pack02")));
-            //QuestionPacks.Add(new QuestionPackVM(new QuestionPackModel("Pack03")));
-            //QuestionPacks.Add(new QuestionPackVM(new QuestionPackModel("Pack04")));
-            //QuestionPacks.Add(new QuestionPackVM(new QuestionPackModel("Pack05")));
-
-            //QuestionPacks[0].Questions.Add(new QuestionVM(new QuestionModel("What day is it?", "Monday", "Thursday", "Saturday", "Sunday")));
-            //QuestionPacks[1].Questions.Add(new QuestionVM(new QuestionModel("Am I evil?", "Yes, I am", "I don't know", "Nah", "No clue")));
-            //QuestionPacks[2].Questions.Add(new QuestionVM(new QuestionModel("Wich is Pi?", "3,14", "14", "3", "2,14")));
-            //QuestionPacks[3].Questions.Add(new QuestionVM(new QuestionModel("Is this app good?", "No", "yes", "Sure is", "LOVE IT")));
-            //QuestionPacks[4].Questions.Add(new QuestionVM(new QuestionModel("What year is it?", "2024", "1998", "2004", "1824")));
         }
         #endregion
 
+
+        #region Methods
         private async void WaitForLoadToComplete()
         {
             await FileHandler.LoadFromFileAsync();
@@ -77,5 +67,6 @@ namespace QuizConfig.ViewModels
             else
                 this.ActivePack = null;
         }
+        #endregion
     }
 }
