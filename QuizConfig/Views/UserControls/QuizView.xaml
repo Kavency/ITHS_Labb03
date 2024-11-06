@@ -8,7 +8,7 @@
              d:DesignHeight="450"
              d:DesignWidth="800"
              d:Background="White">
-    
+
     <Grid d:Visibility="Visible"
           Margin="20"
           HorizontalAlignment="Center"
@@ -25,7 +25,7 @@
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
-        <TextBlock Text="{Binding PlayVM.CurreentQuestion}"
+        <TextBlock Text="{Binding PlayVM.CurrentQuestion}"
                    d:Text="Question goes here and should be able to have a lot of text and wrap around."
                    FontSize="18"
                    TextWrapping="Wrap"
@@ -35,17 +35,31 @@
                    VerticalAlignment="Center"
                    HorizontalAlignment="Center"
                    Margin="30" />
-        <Label Grid.Column="0"
-               Grid.Row="1"
-               d:Content="Question n of n"
-               Content="{Binding PlayVM.TotalNumberOfQuestions}" />
+        <StackPanel Grid.Column="0"
+                    Grid.Row="1"
+                    Orientation="Horizontal">
+            <Label d:Content="Question n"
+                   VerticalAlignment="Center"
+                   Margin="5"
+                   Padding="0">
+                <TextBlock Text="{Binding PlayVM.QuestionNumber, StringFormat=Question {0}}" />
+            </Label>
+            <Label d:Content="of n"
+                   VerticalAlignment="Center"
+                   Margin="0"
+                   Padding="0">
+                <TextBlock Text="{Binding PlayVM.TotalNumberOfQuestions, StringFormat=of {0}}" />
+            </Label>
+
+        </StackPanel>
 
         <Grid Grid.Column="0"
               Grid.Row="2"
               Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="33*" />
+                <ColumnDefinition Width="164*" />
+                <ColumnDefinition Width="197*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
@@ -54,15 +68,16 @@
             <Button Grid.Column="0"
                     Grid.Row="0"
                     Padding="10"
-                    Margin="5"
+                    Margin="5,5,5,5"
                     d:Content="Answer 1"
                     Content="{Binding PlayVM.Answer1}"
                     Command="{Binding PlayVM.AnswerCMD}"
-                    CommandParameter="{Binding Path=Content, RelativeSource={RelativeSource Self}}" />
-            <Button Grid.Column="1"
+                    CommandParameter="{Binding Path=Content, RelativeSource={RelativeSource Self}}"
+                    Grid.ColumnSpan="2" />
+            <Button Grid.Column="2"
                     Grid.Row="0"
                     Padding="10"
-                    Margin="5"
+                    Margin="5,5,5,5"
                     d:Content="Answer 2"
                     Content="{Binding PlayVM.Answer2}"
                     Command="{Binding PlayVM.AnswerCMD}"
@@ -70,15 +85,16 @@
             <Button Grid.Column="0"
                     Grid.Row="1"
                     Padding="10"
-                    Margin="5"
+                    Margin="5,5,5,5"
                     d:Content="Answer 3"
                     Content="{Binding PlayVM.Answer3}"
                     Command="{Binding PlayVM.AnswerCMD}"
-                    CommandParameter="{Binding Path=Content, RelativeSource={RelativeSource Self}}" />
-            <Button Grid.Column="1"
+                    CommandParameter="{Binding Path=Content, RelativeSource={RelativeSource Self}}"
+                    Grid.ColumnSpan="2" />
+            <Button Grid.Column="2"
                     Grid.Row="1"
                     Padding="10"
-                    Margin="5"
+                    Margin="5,5,5,5"
                     d:Content="Answer 4"
                     Content="{Binding PlayVM.Answer4}"
                     Command="{Binding PlayVM.AnswerCMD}"
