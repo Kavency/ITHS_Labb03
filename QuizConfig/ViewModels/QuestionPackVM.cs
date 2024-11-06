@@ -5,34 +5,51 @@ using System.Text.Json.Serialization;
 
 namespace QuizConfig.ViewModels
 {
-    internal class QuestionPackVM
+    internal class QuestionPackVM : BaseVM
     {
-        [JsonPropertyName("QuestionPackModel")]
-        public QuestionPackModel QuestionPackModel { get; set; }
+        [JsonIgnore]
+        private readonly QuestionPackModel _questionPackModel;
 
 
-        [JsonPropertyName("Name")]
-        public string Name => QuestionPackModel.Name;
+        [JsonPropertyName("name")]
+        public string Name 
+        { 
+            get => _questionPackModel.Name; 
+            set { _questionPackModel.Name = value; OnPropertyChanged(); } 
+        }
 
 
-        [JsonPropertyName("TimeLimit")]
-        public int TimeLimit => QuestionPackModel.TimeLimit;
+        [JsonPropertyName("timeLimit")]
+        public int TimeLimit 
+        { 
+            get => _questionPackModel.TimeLimit; 
+            set { _questionPackModel.TimeLimit = value; OnPropertyChanged(); } 
+        }
 
 
-        [JsonPropertyName("Difficulty")]
-        public Difficulty Difficulty => QuestionPackModel.Difficulty;
+        [JsonPropertyName("difficulty")]
+        [JsonConverter(typeof(JsonDifficultyConverter))]
+        public Difficulty Difficulty 
+        { 
+            get => _questionPackModel.Difficulty; 
+            set { _questionPackModel.Difficulty = value; OnPropertyChanged(); } 
+        }
 
 
-        [JsonPropertyName("Questions")]
-        public ObservableCollection<QuestionVM> Questions => QuestionPackModel.Questions;
+        [JsonPropertyName("questions")]
+        public ObservableCollection<QuestionVM> Questions 
+        { 
+            get => _questionPackModel.Questions; 
+            set { _questionPackModel.Questions = value; OnPropertyChanged();  } 
+        }
 
         public QuestionPackVM()
         {
-            this.QuestionPackModel = new QuestionPackModel();
+            this._questionPackModel = new QuestionPackModel();
         }
         public QuestionPackVM(QuestionPackModel questionPackModel)
         {
-            this.QuestionPackModel = questionPackModel;
+            this._questionPackModel = questionPackModel;
         }
     }
 }

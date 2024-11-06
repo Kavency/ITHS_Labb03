@@ -7,45 +7,66 @@ namespace QuizConfig.ViewModels
     internal class QuestionVM : BaseVM
     {
         [JsonIgnore]
-        public QuestionModel QuestionModel { get; set; }
-   
+        private readonly QuestionModel _questionModel;
+
+
+        [JsonPropertyName("type")]
         public string Type
         {
-            get => QuestionModel.Type;
-            set { QuestionModel.Type = value; OnPropertyChanged(); }
+            get => _questionModel.Type;
+            set { _questionModel.Type = value; OnPropertyChanged(); }
         }
+        
+
+        [JsonPropertyName("difficulty")]
         public Difficulty Difficulty
         {
-            get => QuestionModel.Difficulty;
-            set { QuestionModel.Difficulty = value; OnPropertyChanged(); }
+            get => _questionModel.Difficulty;
+            set { _questionModel.Difficulty = value; OnPropertyChanged(); }
         }
+
+
+        [JsonPropertyName("category")]
         public string Category
         {
-            get => QuestionModel.Category;
-            set { QuestionModel.Category = value; OnPropertyChanged(); }
+            get => _questionModel.Category;
+            set { _questionModel.Category = value; OnPropertyChanged(); }
         }
+
+
+        [JsonPropertyName("question")]
         public string Question
         {
-            get => QuestionModel.Question;
-            set { QuestionModel.Question = value; OnPropertyChanged(); }
+            get => _questionModel.Question;
+            set { _questionModel.Question = value; OnPropertyChanged(); }
         }
+
+
+        [JsonPropertyName("correct_answer")]
         public string CorrectAnswer
         {
-            get => QuestionModel.CorrectAnswer;
-            set { QuestionModel.CorrectAnswer = value; OnPropertyChanged(); }
+            get => _questionModel.CorrectAnswer;
+            set { _questionModel.CorrectAnswer = value; OnPropertyChanged(); }
         }
+
+
+        [JsonPropertyName("incorrect_answers")]
         public string[] IncorrectAnswers
         {
-            get => QuestionModel.IncorrectAnswers;
-            set { QuestionModel.IncorrectAnswers = value; OnPropertyChanged(); }
+            get => _questionModel.IncorrectAnswers;
+            set { _questionModel.IncorrectAnswers = value; OnPropertyChanged(); }
         }
+
+
         public QuestionVM()
         {
-            this.QuestionModel = new QuestionModel();
+            this._questionModel = new QuestionModel();
         }
+
+
         public QuestionVM(QuestionModel questionModel)
         {
-            this.QuestionModel = questionModel;
+            this._questionModel = questionModel;
         }
     }
 }
