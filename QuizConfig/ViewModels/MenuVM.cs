@@ -35,6 +35,9 @@ namespace QuizConfig.ViewModels
             {
                 MainVM.EditVisibility = Visibility.Collapsed;
                 MainVM.PlayVisibility = Visibility.Visible;
+                MainVM.PlayVM.QuizStartViewVisibility = Visibility.Visible;
+                MainVM.PlayVM.QuizViewVisibility = Visibility.Hidden;
+                MainVM.PlayVM.QuizEndViewVisibility = Visibility.Hidden;
             }
             else
             {
