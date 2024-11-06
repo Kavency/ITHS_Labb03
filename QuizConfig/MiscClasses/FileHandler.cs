@@ -3,6 +3,7 @@ using QuizConfig.ViewModels;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
+using System.Text.Encodings.Web;
 using System.Text.Json;
 
 namespace QuizConfig.MiscClasses
@@ -17,7 +18,11 @@ namespace QuizConfig.MiscClasses
         public FileHandler(MainVM mainWindowViewModel)
         {
             MainVM = mainWindowViewModel;
-            _options = new JsonSerializerOptions { Converters = { new JsonDifficultyConverter() } };
+            _options = new JsonSerializerOptions
+            {
+                Converters = { new JsonDifficultyConverter() },
+                Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+            };
         }
 
 
