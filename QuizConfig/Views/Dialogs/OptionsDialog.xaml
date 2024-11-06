@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QuizConfig.Views.Dialogs"
+        xmlns:custom="clr-namespace:QuizConfig.MiscClasses"
         mc:Ignorable="d"
         Title="Edit Pack Options"
         Height="250"
@@ -29,12 +30,8 @@
             <Label Content="Pack name:" />
             <TextBox Text="{Binding OptionsDialogVM.Name}" />
             <Label Content="Difficulty:" />
-            <ComboBox 
-                      SelectedItem="{Binding OptionsDialogVM.Difficulty, Mode=TwoWay}">
-                <ComboBoxItem Content="Easy" />
-                <ComboBoxItem Content="Medium" />
-                <ComboBoxItem Content="Hard" />
-            </ComboBox>
+            <ComboBox ItemsSource="{Binding Source={custom:EnumBinder {x:Type custom:Difficulty}}}"
+                      SelectedItem="{Binding OptionsDialogVM.SelectedDifficulty}"/>
             <StackPanel Orientation="Horizontal">
                 <Label Content="Time limit:"
                        HorizontalAlignment="Left" />
