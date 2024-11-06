@@ -42,7 +42,8 @@ namespace QuizConfig.ViewModels
         public int TotalNumberOfQuestions { get => _totalNumberOfQuestions; set { _totalNumberOfQuestions = value; OnPropertyChanged(); } }
         public int PlayerScore { get => _playerScore; set { _playerScore = value; OnPropertyChanged(); } }
         public int QuestionTimeLimit { get => _questionTimeLimit; set { _questionTimeLimit = value; OnPropertyChanged(); } }
-        public string CurreentQuestion { get => _currentQuestion; set { _currentQuestion = value; OnPropertyChanged(); } }
+        public int QuestionNumber { get => _questionNumber; set { _questionNumber = value; OnPropertyChanged(); } }
+        public string CurrentQuestion { get => _currentQuestion; set { _currentQuestion = value; OnPropertyChanged(); } }
         public string Answer1 { get => _answer1; set { _answer1 = value; OnPropertyChanged(); } }
         public string Answer2 { get => _answer2; set { _answer2 = value; OnPropertyChanged(); } }
         public string Answer3 { get => _answer3; set { _answer3 = value; OnPropertyChanged(); } }
@@ -67,11 +68,13 @@ namespace QuizConfig.ViewModels
             QuizStartViewVisibility = Visibility.Visible;
             QuizEndViewVisibility = Visibility.Hidden;
             QuizViewVisibility = Visibility.Hidden;
+            QuestionNumber = 0;
+            PlayerScore = 0;
             RunQuiz();
         }
 
 
-        private void RunQuiz() 
+        private void RunQuiz(object? obj = null)
         {
             QuizStartViewVisibility = Visibility.Hidden;
             QuizViewVisibility = Visibility.Visible;
@@ -92,7 +95,7 @@ namespace QuizConfig.ViewModels
 
                 randomAnswerOrder = answers.OrderBy(x => _rnd.Next()).ToList();
 
-                CurreentQuestion = ActivePack.Questions[_questionNumber].Question;
+                CurrentQuestion = ActivePack.Questions[_questionNumber].Question;
                 Answer1 = randomAnswerOrder[0];
                 Answer2 = randomAnswerOrder[1];
                 Answer3 = randomAnswerOrder[2];
@@ -108,7 +111,7 @@ namespace QuizConfig.ViewModels
         }
 
 
-        private void ShowResult()
+        private void ShowResult(object? obj = null)
         {
             QuizViewVisibility = Visibility.Hidden;
             QuizEndViewVisibility = Visibility.Visible;
@@ -162,7 +165,7 @@ namespace QuizConfig.ViewModels
             }
 
             // TODO: Create a timer and hold for 5 seconds.
-            _questionNumber++;
+            QuestionNumber++;
             ResetTimer();
             RunQuiz();
         }
