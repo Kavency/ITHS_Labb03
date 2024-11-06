@@ -8,12 +8,17 @@ namespace QuizConfig.ViewModels
 {
     internal class CreatePackVM : BaseVM
     {
+        private string _name;
+        private Difficulty _difficulty;
+        private Difficulty _selectedDifficulty;
+        private int _timeLimit;
+
+
         public MainVM MainVM { get; }
-
-        public string Name { get; set; }
-        public Difficulty Difficulty { get; set; } = Difficulty.Medium;
-        public int TimeLimit { get; set; } = 30;
-
+        public string Name { get => _name; set { _name = value; OnPropertyChanged(); } }
+        public Difficulty SelectedDifficulty { get => _selectedDifficulty; set { _selectedDifficulty = value; OnPropertyChanged(); } }
+        public Difficulty Difficulty { get => _difficulty; set { _difficulty = value; OnPropertyChanged(); } }
+        public int TimeLimit { get => _timeLimit; set { _timeLimit = value; OnPropertyChanged(); } }
         public RelayCommand CreateCMD { get; }
         public RelayCommand CancelCMD { get; }
 

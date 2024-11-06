@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QuizConfig.Views.Dialogs"
+        xmlns:custom="clr-namespace:QuizConfig.MiscClasses"
         mc:Ignorable="d"
         Title="Create New Pack"
         Height="250"
@@ -29,12 +30,8 @@
             <Label Content="Pack name:" />
             <TextBox Text="{Binding CreatePackVM.Name}" />
             <Label Content="Difficulty:" />
-            <ComboBox>
-                <ComboBoxItem Content="Easy" />
-                <ComboBoxItem Content="Medium"
-                              IsSelected="True" />
-                <ComboBoxItem Content="Hard" />
-            </ComboBox>
+            <ComboBox ItemsSource="{Binding Source={custom:EnumBinder {x:Type custom:Difficulty}}}"
+                      SelectedItem="{Binding CreatePackVM.Difficulty}" />
             <StackPanel Orientation="Horizontal">
                 <Label Content="Time limit:"
                        HorizontalAlignment="Left" />

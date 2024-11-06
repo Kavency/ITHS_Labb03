@@ -8,11 +8,17 @@ namespace QuizConfig.ViewModels
 {
     internal class OptionsDialogVM : BaseVM
     {
+        private string _name;
+        private Difficulty _difficulty;
+        private Difficulty _selectedDifficulty;
+        private int _timeLimit;
+
         public MainVM MainVM { get; set; }
 
-        public string Name { get; set; }
-        public Difficulty Difficulty { get; set; }
-        public int TimeLimit { get; set; }
+        public string Name { get => _name; set { _name = value; OnPropertyChanged(); } }
+        public Difficulty SelectedDifficulty { get => _selectedDifficulty; set { _selectedDifficulty = value; OnPropertyChanged(); } }
+        public Difficulty Difficulty { get => _difficulty; set { _difficulty = value; OnPropertyChanged(); } }
+        public int TimeLimit { get => _timeLimit; set { _timeLimit = value; OnPropertyChanged(); } }
         public RelayCommand OpenOptionsCMD { get; }
         public RelayCommand UpdateCMD { get; }
         public RelayCommand CancelCMD { get; }
@@ -32,7 +38,9 @@ namespace QuizConfig.ViewModels
         {
             Name = MainVM.ActivePack.Name;
             Difficulty = MainVM.ActivePack.Difficulty;
+            SelectedDifficulty = MainVM.ActivePack.Difficulty;
             TimeLimit = MainVM.ActivePack.TimeLimit;
+            //EnumConverter enumConverter = new EnumConverter();
 
             OptionsDialog optionsDialog = new OptionsDialog();
             optionsDialog.ShowDialog();
@@ -41,7 +49,7 @@ namespace QuizConfig.ViewModels
 
         private async void Update(object? obj)
         {
-            QuestionPackVM newPack = new QuestionPackVM(new QuestionPackModel(Name, TimeLimit, Difficulty));
+            QuestionPackVM newPack = new QuestionPackVM(new QuestionPackModel(Name, TimeLimit, SelectedDifficulty));
             MainVM.ActivePack = newPack;
             await MainVM.FileHandler.SaveToFileAsync();
             Cancel(obj);
