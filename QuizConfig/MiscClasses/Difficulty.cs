@@ -2,8 +2,8 @@
 {
     public enum Difficulty
     {
-        Easy,
-        Medium,
-        Hard
+        easy,
+        medium,
+        hard
     }
 }
