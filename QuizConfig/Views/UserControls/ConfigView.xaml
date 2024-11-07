@@ -10,15 +10,18 @@
              d:DesignHeight="450"
              d:DesignWidth="800"
              Background="White">
-    
-    <Grid Margin="10">
+
+    <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="380" />
+            <ColumnDefinition Width="380" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="7*" />
+            <RowDefinition Height="*"
+                           MaxHeight="60" />
+            <RowDefinition Height="6*" />
+            <RowDefinition Height="*"
+                           MaxHeight="60" />
         </Grid.RowDefinitions>
         <Grid HorizontalAlignment="Center"
               VerticalAlignment="Center"
@@ -34,6 +37,7 @@
                       VerticalAlignment="Center"
                       Padding="5"
                       Margin="5"
+                      ToolTip="Select pack"
                       ItemsSource="{Binding QuestionPacks}"
                       SelectedItem="{Binding ActivePack}">
                 <ComboBox.ItemTemplate>
@@ -48,14 +52,17 @@
                 <Button Content="{fa:Icon list}"
                         Padding="10,5"
                         Margin="5"
+                        ToolTip="Open pack options"
                         Command="{Binding OptionsDialogVM.OpenOptionsCMD}" />
                 <Button Content="{fa:Icon plus}"
                         Padding="10,5"
                         Margin="5"
+                        ToolTip="Add a question"
                         Command="{Binding ConfigVM.AddNewQuestionCMD}" />
                 <Button Content="{fa:Icon minus}"
                         Padding="10,5"
                         Margin="5"
+                        ToolTip="Delete selected question"
                         Command="{Binding ConfigVM.DeleteQuestionCMD}" />
             </StackPanel>
         </Grid>
@@ -86,27 +93,35 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-            <StackPanel Grid.Column="0"
-                        Grid.Row="1"
-                        Orientation="Horizontal">
-                <Button Content="Add pack"
-                        Margin="5"
-                        Padding="5"
-                        Command="{Binding ConfigVM.AddPackCMD}"/>
-                <Button Content="Delete pack"
-                        Margin="5"
-                        Padding="5"
-                        Command="{Binding ConfigVM.DeletePackCMD}"/>
-            </StackPanel>
+        </StackPanel>
+        <StackPanel Grid.Column="0"
+                    Grid.Row="2"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Center">
+            <Button Content="Add pack"
+                    Margin="5"
+                    Padding="20,5"
+                    ToolTip="Add a pack"
+                    Command="{Binding ConfigVM.AddPackCMD}" />
+            <Button Content="Delete pack"
+                    Margin="60,5,5,5"
+                    Padding="20,5"
+                    ToolTip="Delete selected pack"
+                    Command="{Binding ConfigVM.DeletePackCMD}" />
         </StackPanel>
 
+        <Label Grid.Column="1"
+               Grid.Row="0"
+               VerticalAlignment="Bottom"
+               Padding="0"
+               Margin="10,0"
+               Content="Question:"
+               Visibility="{Binding ConfigVM.QuestionFormVisibility}"/>
         <StackPanel Grid.Column="1"
                     Grid.Row="1"
                     Orientation="Vertical"
                     Margin="10,0,10,10"
                     Visibility="{Binding ConfigVM.QuestionFormVisibility}">
-            <Label Content="Question:"
-                   Padding="0" />
             <TextBox x:Name="QuestionTextBox"
                      Height="100"
                      TextWrapping="Wrap"
@@ -125,28 +140,35 @@
                    Padding="0,5,0,0" />
             <TextBox Text="{Binding ConfigVM.WrongAnswer3TextBox}" />
 
-            <StackPanel Orientation="Horizontal"
-                        HorizontalAlignment="Center">
-                <Button Content="Save and Close"
-                        Margin="10"
-                        Padding="10"
-                        Command="{Binding ConfigVM.SaveAndCloseButtonCMD}"
-                        Visibility="{Binding ConfigVM.SaveAndCloseButtonVisibility}" />
-                <Button Content="Save and Add more"
-                        Margin="10"
-                        Padding="10"
-                        Command="{Binding ConfigVM.SaveAndAddButtonCMD}"
-                        Visibility="{Binding ConfigVM.SaveAndAddButtonVisibility}" />
-                <Button Content="Update"
-                        Margin="10"
-                        Padding="10"
-                        Command="{Binding ConfigVM.UpdateQuestionCMD}"
-                        Visibility="{Binding ConfigVM.UpdateButtonVisibility}" />
-                <Button Content="Cancel"
-                        Margin="10"
-                        Padding="10"
-                        Command="{Binding ConfigVM.CancelCMD}" />
-            </StackPanel>
+        </StackPanel>
+        <StackPanel Grid.Column="1"
+                    Grid.Row="2"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Center"
+                    Visibility="{Binding ConfigVM.QuestionFormVisibility}">
+            <Button Content="Save and Close"
+                    Margin="5"
+                    Padding="20,5"
+                    ToolTip="Save question and close form"
+                    Command="{Binding ConfigVM.SaveAndCloseButtonCMD}"
+                    Visibility="{Binding ConfigVM.SaveAndCloseButtonVisibility}" />
+            <Button Content="Save and Add more"
+                    Margin="5"
+                    Padding="20,5"
+                    ToolTip="Save question and add another"
+                    Command="{Binding ConfigVM.SaveAndAddButtonCMD}"
+                    Visibility="{Binding ConfigVM.SaveAndAddButtonVisibility}" />
+            <Button Content="Update"
+                    Margin="5"
+                    Padding="20,5"
+                    ToolTip="Update question"
+                    Command="{Binding ConfigVM.UpdateQuestionCMD}"
+                    Visibility="{Binding ConfigVM.UpdateButtonVisibility}" />
+            <Button Content="Cancel"
+                    Margin="5"
+                    Padding="20,5"
+                    ToolTip="Close form"
+                    Command="{Binding ConfigVM.CancelCMD}" />
         </StackPanel>
     </Grid>
 </UserControl>
