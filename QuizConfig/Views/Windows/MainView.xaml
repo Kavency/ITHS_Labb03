@@ -15,11 +15,17 @@
     <Window.DataContext>
         <vm:MainVM />
     </Window.DataContext>
-    <Grid>
-        <StackPanel Orientation="Vertical">
-            <views:MenuView />
-            <views:ConfigView Visibility="{Binding EditVisibility}" />
-            <views:PlayView Visibility="{Binding PlayVisibility}" />
-        </StackPanel>
+
+    <DockPanel>
+        <views:MenuView DockPanel.Dock="Top" />
+        <Grid Grid.Row="1"
+              MaxWidth="800"
+              MaxHeight="400"
+              HorizontalAlignment="Center"
+              VerticalAlignment="Center">
+            <views:ConfigView d:Visibility="Visible"
+                              Visibility="{Binding EditVisibility}" />
+            <views:PlayView d:Visibility="Hidden"
+                            Visibility="{Binding PlayVisibility}" />
     </Grid>
 </Window>
