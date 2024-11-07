@@ -18,15 +18,15 @@ namespace QuizConfig.ViewModels
         private int _playerScore = 0;
         private int _questionNumber;
         private string _currentQuestion;
-        private string _answer1;
-        private string _answer2;
-        private string _answer3;
-        private string _answer4;
+        private string _answerButton1;
+        private string _answerButton2;
+        private string _answerButton3;
+        private string _answerButton4;
         private Visibility _quizStartViewVisibility = Visibility.Visible;
         private Visibility _quizViewVisibility = Visibility.Hidden;
         private Visibility _quizEndViewVisibility = Visibility.Hidden;
-        private List<string> answers = new();
-        private List<string> randomAnswerOrder = new();
+        private List<string> _answers = new();
+        private List<string> _randomAnswerOrder = new();
         #endregion
 
 
@@ -34,7 +34,6 @@ namespace QuizConfig.ViewModels
         public MainVM MainVM { get; set; }
         public RelayCommand StartQuizCMD { get; }
         public RelayCommand AnswerCMD { get; }
-        public QuestionPackVM ActivePack { get => MainVM.ActivePack; set { this.ActivePack = value; OnPropertyChanged(); } }
         public Visibility QuizStartViewVisibility { get => _quizStartViewVisibility; set { _quizStartViewVisibility = value; OnPropertyChanged(); } }
         public Visibility QuizViewVisibility { get => _quizViewVisibility; set { _quizViewVisibility = value; OnPropertyChanged(); } }
         public Visibility QuizEndViewVisibility { get => _quizEndViewVisibility; set { _quizEndViewVisibility = value; OnPropertyChanged(); } }
@@ -44,10 +43,10 @@ namespace QuizConfig.ViewModels
         public int QuestionTimeLimit { get => _questionTimeLimit; set { _questionTimeLimit = value; OnPropertyChanged(); } }
         public int QuestionNumber { get => _questionNumber; set { _questionNumber = value; OnPropertyChanged(); } }
         public string CurrentQuestion { get => _currentQuestion; set { _currentQuestion = value; OnPropertyChanged(); } }
-        public string Answer1 { get => _answer1; set { _answer1 = value; OnPropertyChanged(); } }
-        public string Answer2 { get => _answer2; set { _answer2 = value; OnPropertyChanged(); } }
-        public string Answer3 { get => _answer3; set { _answer3 = value; OnPropertyChanged(); } }
-        public string Answer4 { get => _answer4; set { _answer4 = value; OnPropertyChanged(); } }
+        public string AnswerButton1 { get => _answerButton1; set { _answerButton1 = value; OnPropertyChanged(); } }
+        public string AnswerButton2 { get => _answerButton2; set { _answerButton2 = value; OnPropertyChanged(); } }
+        public string AnswerButton3 { get => _answerButton3; set { _answerButton3 = value; OnPropertyChanged(); } }
+        public string AnswerButton4 { get => _answerButton4; set { _answerButton4 = value; OnPropertyChanged(); } }
         #endregion
 
 
@@ -78,28 +77,28 @@ namespace QuizConfig.ViewModels
         {
             QuizStartViewVisibility = Visibility.Hidden;
             QuizViewVisibility = Visibility.Visible;
-            QuestionTimeLimit = ActivePack.TimeLimit;
-            _timerProgressBar = ActivePack.TimeLimit;
+            QuestionTimeLimit = MainVM.ActivePack.TimeLimit;
+            _timerProgressBar = MainVM.ActivePack.TimeLimit;
 
-            TotalNumberOfQuestions = ActivePack.Questions.Count;
+            TotalNumberOfQuestions = MainVM.ActivePack.Questions.Count;
 
-            answers.Clear();
-            randomAnswerOrder.Clear();
+            _answers.Clear();
+            _randomAnswerOrder.Clear();
 
-            if (_questionNumber <= ActivePack.Questions.Count - 1)
+            if (_questionNumber <= MainVM.ActivePack.Questions.Count - 1)
             {
-                answers.Add(ActivePack.Questions[_questionNumber].CorrectAnswer);
-                answers.Add(ActivePack.Questions[_questionNumber].IncorrectAnswers[0]);
-                answers.Add(ActivePack.Questions[_questionNumber].IncorrectAnswers[1]);
-                answers.Add(ActivePack.Questions[_questionNumber].IncorrectAnswers[2]);
+                _answers.Add(MainVM.ActivePack.Questions[_questionNumber].CorrectAnswer);
+                _answers.Add(MainVM.ActivePack.Questions[_questionNumber].IncorrectAnswers[0]);
+                _answers.Add(MainVM.ActivePack.Questions[_questionNumber].IncorrectAnswers[1]);
+                _answers.Add(MainVM.ActivePack.Questions[_questionNumber].IncorrectAnswers[2]);
 
-                randomAnswerOrder = answers.OrderBy(x => _rnd.Next()).ToList();
+                _randomAnswerOrder = _answers.OrderBy(x => _rnd.Next()).ToList();
 
-                CurrentQuestion = ActivePack.Questions[_questionNumber].Question;
-                Answer1 = randomAnswerOrder[0];
-                Answer2 = randomAnswerOrder[1];
-                Answer3 = randomAnswerOrder[2];
-                Answer4 = randomAnswerOrder[3];
+                CurrentQuestion = MainVM.ActivePack.Questions[_questionNumber].Question;
+                AnswerButton1 = _randomAnswerOrder[0];
+                AnswerButton2 = _randomAnswerOrder[1];
+                AnswerButton3 = _randomAnswerOrder[2];
+                AnswerButton4 = _randomAnswerOrder[3];
 
                 InitializeTimer(_timerProgressBar);
             }
@@ -151,17 +150,10 @@ namespace QuizConfig.ViewModels
 
         private void AnswerClicked(object? obj)
         {
-            if (obj == ActivePack.Questions[_questionNumber].CorrectAnswer)
+            if (obj == MainVM.ActivePack.Questions[_questionNumber].CorrectAnswer)
             {
-                // TODO: Correctly answered logic
                 PlayerScore++;
                 Debug.WriteLine("Correct answer choosen");
-            }
-            else
-            {
-                // TODO: Wrongly answered logic
-                TotalNumberOfQuestions = -100;
-                Debug.WriteLine("Wrong answer choosen");
             }
 
             // TODO: Create a timer and hold for 5 seconds.
