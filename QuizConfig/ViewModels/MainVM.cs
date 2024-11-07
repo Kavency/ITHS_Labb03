@@ -62,7 +62,7 @@ namespace QuizConfig.ViewModels
         {
             await FileHandler.LoadFromFileAsync();
             
-            if (QuestionPacks is not null)
+            if (QuestionPacks is not null || QuestionPacks.Count < 1)
                 this.ActivePack = this.QuestionPacks[0];
             else
                 this.ActivePack = null;

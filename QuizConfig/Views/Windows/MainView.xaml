@@ -11,7 +11,43 @@
         Title="QuizConfig 2.0"
         Height="450"
         Width="800"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        WindowStyle="None">
+    
+    <Window.InputBindings>
+        <KeyBinding Modifiers="Control"
+                    Key="N"
+                    Command="{Binding ConfigVM.AddPackCMD}" />
+        <KeyBinding Modifiers="Control"
+                    Key="Delete"
+                    Command="{Binding ConfigVM.DeletePackCMD}" />
+        <KeyBinding Modifiers="Control"
+                    Key="I"
+                    Command="{Binding ConfigVM.ImportCMD}" />
+        <KeyBinding Modifiers="Control"
+                    Key="X"
+                    Command="{Binding MenuVM.ExitProgramCMD}" />
+        <KeyBinding Modifiers="Control"
+                    Key="OemPlus"
+                    Command="{Binding ConfigVM.AddNewQuestionCMD}" />
+        <KeyBinding Modifiers="Control"
+                    Key="OemMinus"
+                    Command="{Binding ConfigVM.DeleteQuestionCMD}" />
+        <KeyBinding Modifiers="Control"
+                    Key="O"
+                    Command="{Binding OptionsDialogVM.OpenOptionsCMD}" />
+        <KeyBinding Modifiers="Control"
+                    Key="E"
+                    Command="{Binding MenuVM.SwitchViewCMD}" />
+        <KeyBinding Modifiers="Control"
+                    Key="P"
+                    Command="{Binding MenuVM.SwitchViewCMD}" />
+        <KeyBinding Modifiers="Control"
+                    Key="Return"
+                    Command="{Binding MenuVM.MaximizeWindowCMD}" />
+    </Window.InputBindings>
+
     <Window.DataContext>
         <vm:MainVM />
     </Window.DataContext>
@@ -27,5 +63,6 @@
                               Visibility="{Binding EditVisibility}" />
             <views:PlayView d:Visibility="Hidden"
                             Visibility="{Binding PlayVisibility}" />
-    </Grid>
+        </Grid>
+    </DockPanel>
 </Window>

@@ -26,7 +26,7 @@
                     <MenuItem Header="Add question pack"
                               Icon="{fa:Icon file}"
                               Command="{Binding ConfigVM.AddPackCMD}"
-                              InputGestureText="Ctrl n" />
+                              InputGestureText="Ctrl+N" />
 
                     <MenuItem Header="Select question pack"
                               Icon="{fa:Icon squarecheck}"
@@ -47,7 +47,7 @@
 
                     <MenuItem Header="Delete question pack"
                               Icon="{fa:Icon trashcan}"
-                              InputGestureText="Ctrl Del"
+                              InputGestureText="Ctrl+Del"
                               Command="{Binding DataContext.ConfigVM.DeletePackCMD, RelativeSource={RelativeSource AncestorType=Window}}" />
                     <Separator />
                     <MenuItem Header="Import questions"
@@ -55,29 +55,29 @@
                     <Separator />
                     <MenuItem Header="E_xit"
                               Icon="{fa:Icon righttobracket}"
-                              InputGestureText="Ctrl x"
+                              InputGestureText="Ctrl+X"
                               Command="{Binding MenuVM.ExitProgramCMD}" />
                 </MenuItem>
 
                 <MenuItem Header="_Edit">
                     <MenuItem Header="_Add"
                               Icon="{fa:Icon plus}"
-                              InputGestureText="Ctrl +"
+                              InputGestureText="Ctrl++"
                               Command="{Binding ConfigVM.AddNewQuestionCMD}" />
                     <MenuItem Header="_Remove"
                               Icon="{fa:Icon minus}"
-                              InputGestureText="Ctrl -"
+                              InputGestureText="Ctrl+-"
                               Command="{Binding ConfigVM.DeleteQuestionCMD}" />
                     <MenuItem Header="_Options"
                               Icon="{fa:Icon list}"
-                              InputGestureText="Ctrl o"
+                              InputGestureText="Ctrl+O"
                               Command="{Binding OptionsDialogVM.OpenOptionsCMD}" />
                 </MenuItem>
 
                 <MenuItem Header="View">
                     <MenuItem Header="_Edit"
                               Icon="{fa:Icon pentosquare}"
-                              InputGestureText="Ctrl + e"
+                              InputGestureText="Ctrl+E"
                               x:Name="EditMenuItem"
                               Command="{Binding MenuVM.SwitchViewCMD}">
                         <MenuItem.Style>
@@ -97,7 +97,7 @@
                     <MenuItem Header="_Play"
                               x:Name="PlayMenuItem"
                               Icon="{fa:Icon play}"
-                              InputGestureText="Ctrl + p"
+                              InputGestureText="Ctrl+P"
                               Command="{Binding MenuVM.SwitchViewCMD}">
                         <MenuItem.Style>
                             <Style TargetType="MenuItem">
@@ -119,7 +119,7 @@
                     <Separator />
                     <MenuItem Header="Fullscreen"
                               Icon="{fa:Icon expand}"
-                              InputGestureText="Ctrl Enter" />
+                              InputGestureText="Ctrl+Enter" />
                 </MenuItem>
             </Menu>
         </StackPanel>
