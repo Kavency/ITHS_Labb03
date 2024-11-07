@@ -156,7 +156,8 @@ namespace QuizConfig.ViewModels
                 Debug.WriteLine("Correct answer choosen");
             }
 
-            // TODO: Create a timer and hold for 5 seconds.
+            Thread.Sleep(1000);
+
             QuestionNumber++;
             ResetTimer();
             RunQuiz();
