@@ -169,6 +169,8 @@
                      Height="25"
                      Width="300"
                      d:Value="100"
-                     Value="{Binding PlayVM.TimerProgressBar}" />
+                     Foreground="#FF7FFF94"
+                     Value="{Binding PlayVM.TimerProgressBar}"
+                     BorderBrush="Black" />
     </Grid>
 </UserControl>

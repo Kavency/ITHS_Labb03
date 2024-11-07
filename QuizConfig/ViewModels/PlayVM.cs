@@ -10,6 +10,7 @@ namespace QuizConfig.ViewModels
         private Random _rnd;
         private DispatcherTimer _timer;
         private List<string> _answers = new();
+        private List<QuestionVM> _randomQuestionOrder = new();
         private List<string> _randomAnswerOrder = new();
         private int _questionTimeLimit;
         private int _timerLimit;
@@ -79,9 +80,12 @@ namespace QuizConfig.ViewModels
         #region Methods
         private void SetupQuiz(object? obj)
         {
-            QuestionNumber = 0;
+            QuestionNumber = 1;
             PlayerScore = 0;
+            
             ResetVisibility();
+            _randomQuestionOrder.Clear();
+            _randomQuestionOrder = MainVM.ActivePack.Questions.OrderBy(x => _rnd.Next()).ToList();
             RunQuiz();
         }
 
@@ -113,16 +117,25 @@ namespace QuizConfig.ViewModels
             _randomAnswerOrder.Clear();
 
 
-            if (_questionNumber <= MainVM.ActivePack.Questions.Count - 1)
+            //if (QuestionNumber <= MainVM.ActivePack.Questions.Count)
+            if (QuestionNumber <= _randomQuestionOrder.Count)
             {
-                _answers.Add(MainVM.ActivePack.Questions[_questionNumber].CorrectAnswer);
-                _answers.Add(MainVM.ActivePack.Questions[_questionNumber].IncorrectAnswers[0]);
-                _answers.Add(MainVM.ActivePack.Questions[_questionNumber].IncorrectAnswers[1]);
-                _answers.Add(MainVM.ActivePack.Questions[_questionNumber].IncorrectAnswers[2]);
+                
+                _answers.Add(_randomQuestionOrder[QuestionNumber - 1].CorrectAnswer);
+                _answers.Add(_randomQuestionOrder[QuestionNumber - 1].IncorrectAnswers[0]);
+                _answers.Add(_randomQuestionOrder[QuestionNumber - 1].IncorrectAnswers[1]);
+                _answers.Add(_randomQuestionOrder[QuestionNumber - 1].IncorrectAnswers[2]);
+
+                //_answers.Add(MainVM.ActivePack.Questions[QuestionNumber].CorrectAnswer);
+                //_answers.Add(MainVM.ActivePack.Questions[QuestionNumber].IncorrectAnswers[0]);
+                //_answers.Add(MainVM.ActivePack.Questions[QuestionNumber].IncorrectAnswers[1]);
+                //_answers.Add(MainVM.ActivePack.Questions[QuestionNumber].IncorrectAnswers[2]);
 
                 _randomAnswerOrder = _answers.OrderBy(x => _rnd.Next()).ToList();
 
-                CurrentQuestion = MainVM.ActivePack.Questions[_questionNumber].Question;
+
+                CurrentQuestion = _randomQuestionOrder[QuestionNumber - 1].Question;
+                //CurrentQuestion = MainVM.ActivePack.Questions[QuestionNumber].Question;
                 AnswerButton1 = _randomAnswerOrder[0];
                 AnswerButton2 = _randomAnswerOrder[1];
                 AnswerButton3 = _randomAnswerOrder[2];
@@ -169,7 +182,7 @@ namespace QuizConfig.ViewModels
             }
             else
             {
-                _questionNumber++;
+                QuestionNumber++;
                 Thread.Sleep(1000);
                 ResetTimer();
                 RunQuiz();
@@ -179,7 +192,8 @@ namespace QuizConfig.ViewModels
 
         private async void AnswerClicked(object? obj)
         {
-            if (obj == MainVM.ActivePack.Questions[_questionNumber].CorrectAnswer)
+            //if (obj == MainVM.ActivePack.Questions[_questionNumber].CorrectAnswer)
+            if (obj == _randomQuestionOrder[QuestionNumber - 1].CorrectAnswer)
             {
                 PlayerScore++;
                 ShowCorrectTickBox();
@@ -219,13 +233,22 @@ namespace QuizConfig.ViewModels
 
         private void ShowCorrectTickBox()
         {
-            if (AnswerButton1 == MainVM.ActivePack.Questions[_questionNumber].CorrectAnswer)
+            //if (AnswerButton1 == MainVM.ActivePack.Questions[_questionNumber].CorrectAnswer)
+            //    CorrectTick1 = Visibility.Visible;
+            //else if (AnswerButton2 == MainVM.ActivePack.Questions[_questionNumber].CorrectAnswer)
+            //    CorrectTick2 = Visibility.Visible;
+            //else if (AnswerButton3 == MainVM.ActivePack.Questions[_questionNumber].CorrectAnswer)
+            //    CorrectTick3 = Visibility.Visible;
+            //else if (AnswerButton4 == MainVM.ActivePack.Questions[_questionNumber].CorrectAnswer)
+            //    CorrectTick4 = Visibility.Visible;
+
+            if (AnswerButton1 == _randomQuestionOrder[QuestionNumber - 1].CorrectAnswer)
                 CorrectTick1 = Visibility.Visible;
-            else if (AnswerButton2 == MainVM.ActivePack.Questions[_questionNumber].CorrectAnswer)
+            else if (AnswerButton2 == _randomQuestionOrder[QuestionNumber - 1].CorrectAnswer)
                 CorrectTick2 = Visibility.Visible;
-            else if (AnswerButton3 == MainVM.ActivePack.Questions[_questionNumber].CorrectAnswer)
+            else if (AnswerButton3 == _randomQuestionOrder[QuestionNumber - 1].CorrectAnswer)
                 CorrectTick3 = Visibility.Visible;
-            else if (AnswerButton4 == MainVM.ActivePack.Questions[_questionNumber].CorrectAnswer)
+            else if (AnswerButton4 == _randomQuestionOrder[QuestionNumber - 1].CorrectAnswer)
                 CorrectTick4 = Visibility.Visible;
         }
 
