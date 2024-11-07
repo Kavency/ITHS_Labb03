@@ -7,16 +7,19 @@
              xmlns:local="clr-namespace:QuizConfig.Views.UserControls"
              mc:Ignorable="d"
              d:DesignHeight="20"
-             d:DesignWidth="800">
-    <Grid>
+             d:DesignWidth="800"
+             d:Background="WhiteSmoke">
+    <Grid Background="WhiteSmoke"
+          VerticalAlignment="Center">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="5*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
         <StackPanel Orientation="Horizontal"
-                    Grid.ColumnSpan="3">
+                    Grid.ColumnSpan="3"
+                    VerticalAlignment="Center">
             <Menu Grid.Column="0"
                   HorizontalAlignment="Left">
                 <MenuItem Header="_File">
@@ -53,14 +56,14 @@
                     <MenuItem Header="E_xit"
                               Icon="{fa:Icon righttobracket}"
                               InputGestureText="Ctrl x"
-                              Command="{Binding MenuVM.ExitProgramCMD}"/>
+                              Command="{Binding MenuVM.ExitProgramCMD}" />
                 </MenuItem>
 
                 <MenuItem Header="_Edit">
                     <MenuItem Header="_Add"
                               Icon="{fa:Icon plus}"
                               InputGestureText="Ctrl +"
-                              Command="{Binding ConfigVM.AddNewQuestionCMD}"/>
+                              Command="{Binding ConfigVM.AddNewQuestionCMD}" />
                     <MenuItem Header="_Remove"
                               Icon="{fa:Icon minus}"
                               InputGestureText="Ctrl -"
@@ -70,7 +73,7 @@
                               InputGestureText="Ctrl o"
                               Command="{Binding OptionsDialogVM.OpenOptionsCMD}" />
                 </MenuItem>
-                
+
                 <MenuItem Header="View">
                     <MenuItem Header="_Edit"
                               Icon="{fa:Icon pentosquare}"
@@ -120,5 +123,23 @@
                 </MenuItem>
             </Menu>
         </StackPanel>
+        <Label Content="Quiz Configurator"
+               Grid.Column="1"
+               HorizontalAlignment="Center"
+               HorizontalContentAlignment="Center" />
+        <!--MouseDown="Menu_MouseDown"-->
+
+        <Menu Grid.Column="2"
+              HorizontalAlignment="Right">
+            <MenuItem ToolTip="Minimize window"
+                      Icon="{fa:Icon windowminimize}"
+                      Command="{Binding MenuVM.MinimizeWindowCMD}" />
+            <MenuItem ToolTip="Maximize window"
+                      Icon="{fa:Icon windowmaximize}"
+                      Command="{Binding MenuVM.MaximizeWindowCMD}" />
+            <MenuItem ToolTip="Exit program"
+                      Icon="{fa:Icon rectanglexmark}"
+                      Command="{Binding MenuVM.ExitProgramCMD}" />
+        </Menu>
     </Grid>
 </UserControl>
