@@ -22,7 +22,7 @@ namespace QuizConfig.ViewModels
         private async void ExitProgram(object? obj)
         {
             await _mainVM.FileHandler.SaveToFileAsync();
-            CloseDialog(obj);
+            Application.Current.Shutdown();
         }
         private void CloseDialog(object? obj)
         {
