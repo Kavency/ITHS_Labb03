@@ -8,7 +8,7 @@
              d:DesignHeight="450"
              d:DesignWidth="800"
              d:Background="White">
-    
+
     <Grid d:Visibility="Visible"
           Margin="20"
           MaxWidth="400">
@@ -26,13 +26,28 @@
                HorizontalAlignment="Center"
                FontSize="34"
                Content="Completed" />
-        <Label Grid.Row="1"
-               VerticalAlignment="Center"
-               HorizontalAlignment="Center"
-               FontSize="24"
-               Margin="25"
-               d:Content="5"
-               Content="{Binding PlayVM.PlayerScore}" />
+
+        <StackPanel Grid.Row="1"
+                    Orientation="Horizontal"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center">
+            <TextBox FontSize="24"
+                     FlowDirection="RightToLeft"
+                     BorderBrush="{x:Null}"
+                     d:Text="n"
+                     Text="{Binding PlayVM.PlayerScore}" />
+            <TextBox FontSize="24"
+                     Margin="5,0"
+                     BorderBrush="{x:Null}"
+                     Text="correct out of" />
+            <TextBox FontSize="24"
+                     FlowDirection="LeftToRight"
+                     BorderBrush="{x:Null}"
+                     d:Text="n"
+                     Text="{Binding PlayVM.TotalNumberOfQuestions}" />
+
+        </StackPanel>
+
         <Button Grid.Row="2"
                 VerticalAlignment="Center"
                 HorizontalAlignment="Center"
@@ -40,6 +55,6 @@
                 Margin="25"
                 Padding="25,5"
                 Content="Try again"
-                Command="{Binding PlayVM.StartQuizCMD}"/>
+                Command="{Binding PlayVM.StartQuizCMD}" />
     </Grid>
 </UserControl>

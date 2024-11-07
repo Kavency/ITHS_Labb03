@@ -1,5 +1,4 @@
 ﻿using QuizConfig.Commands;
-using System.Diagnostics;
 using System.Windows;
 using System.Windows.Threading;
 
@@ -10,6 +9,9 @@ namespace QuizConfig.ViewModels
         #region Fields
         private Random _rnd;
         private DispatcherTimer _timer;
+        private List<string> _answers = new();
+        private List<QuestionVM> _randomQuestionOrder = new();
+        private List<string> _randomAnswerOrder = new();
         private int _questionTimeLimit;
         private int _timerLimit;
         private int _elapsedTime = 0;
@@ -25,8 +27,14 @@ namespace QuizConfig.ViewModels
         private Visibility _quizStartViewVisibility = Visibility.Visible;
         private Visibility _quizViewVisibility = Visibility.Hidden;
         private Visibility _quizEndViewVisibility = Visibility.Hidden;
-        private List<string> _answers = new();
-        private List<string> _randomAnswerOrder = new();
+        private Visibility _correctTick1 = Visibility.Hidden;
+        private Visibility _correctTick2 = Visibility.Hidden;
+        private Visibility _correctTick3 = Visibility.Hidden;
+        private Visibility _correctTick4 = Visibility.Hidden;
+        private Visibility _wrongTick1 = Visibility.Hidden;
+        private Visibility _wrongTick2 = Visibility.Hidden;
+        private Visibility _wrongTick3 = Visibility.Hidden;
+        private Visibility _wrongTick4 = Visibility.Hidden;
         #endregion
 
 
@@ -37,6 +45,14 @@ namespace QuizConfig.ViewModels
         public Visibility QuizStartViewVisibility { get => _quizStartViewVisibility; set { _quizStartViewVisibility = value; OnPropertyChanged(); } }
         public Visibility QuizViewVisibility { get => _quizViewVisibility; set { _quizViewVisibility = value; OnPropertyChanged(); } }
         public Visibility QuizEndViewVisibility { get => _quizEndViewVisibility; set { _quizEndViewVisibility = value; OnPropertyChanged(); } }
+        public Visibility CorrectTick1 { get => _correctTick1; set { _correctTick1 = value; OnPropertyChanged(); } }
+        public Visibility CorrectTick2 { get => _correctTick2; set { _correctTick2 = value; OnPropertyChanged(); } }
+        public Visibility CorrectTick3 { get => _correctTick3; set { _correctTick3 = value; OnPropertyChanged(); } }
+        public Visibility CorrectTick4 { get => _correctTick4; set { _correctTick4 = value; OnPropertyChanged(); } }
+        public Visibility WrongTick1 { get => _wrongTick1; set { _wrongTick1 = value; OnPropertyChanged(); } }
+        public Visibility WrongTick2 { get => _wrongTick2; set { _wrongTick2 = value; OnPropertyChanged(); } }
+        public Visibility WrongTick3 { get => _wrongTick3; set { _wrongTick3 = value; OnPropertyChanged(); } }
+        public Visibility WrongTick4 { get => _wrongTick4; set { _wrongTick4 = value; OnPropertyChanged(); } }
         public int TimerProgressBar { get => _timerProgressBar; set { _timerProgressBar = value; OnPropertyChanged(); } }
         public int TotalNumberOfQuestions { get => _totalNumberOfQuestions; set { _totalNumberOfQuestions = value; OnPropertyChanged(); } }
         public int PlayerScore { get => _playerScore; set { _playerScore = value; OnPropertyChanged(); } }
@@ -64,37 +80,62 @@ namespace QuizConfig.ViewModels
         #region Methods
         private void SetupQuiz(object? obj)
         {
-            QuizStartViewVisibility = Visibility.Visible;
-            QuizEndViewVisibility = Visibility.Hidden;
-            QuizViewVisibility = Visibility.Hidden;
-            QuestionNumber = 0;
+            QuestionNumber = 1;
             PlayerScore = 0;
+            
+            ResetVisibility();
+            _randomQuestionOrder.Clear();
+            _randomQuestionOrder = MainVM.ActivePack.Questions.OrderBy(x => _rnd.Next()).ToList();
             RunQuiz();
         }
 
+        private void ResetVisibility()
+        {
+            QuizStartViewVisibility = Visibility.Visible;
+            QuizEndViewVisibility = Visibility.Hidden;
+            QuizViewVisibility = Visibility.Hidden;
+            CorrectTick1 = Visibility.Hidden;
+            CorrectTick2 = Visibility.Hidden;
+            CorrectTick3 = Visibility.Hidden;
+            CorrectTick4 = Visibility.Hidden;
+            WrongTick1 = Visibility.Hidden;
+            WrongTick2 = Visibility.Hidden;
+            WrongTick3 = Visibility.Hidden;
+            WrongTick4 = Visibility.Hidden;
+        }
 
         private void RunQuiz(object? obj = null)
         {
             QuizStartViewVisibility = Visibility.Hidden;
             QuizViewVisibility = Visibility.Visible;
+
             QuestionTimeLimit = MainVM.ActivePack.TimeLimit;
             _timerProgressBar = MainVM.ActivePack.TimeLimit;
-
             TotalNumberOfQuestions = MainVM.ActivePack.Questions.Count;
 
             _answers.Clear();
             _randomAnswerOrder.Clear();
 
-            if (_questionNumber <= MainVM.ActivePack.Questions.Count - 1)
+
+            //if (QuestionNumber <= MainVM.ActivePack.Questions.Count)
+            if (QuestionNumber <= _randomQuestionOrder.Count)
             {
-                _answers.Add(MainVM.ActivePack.Questions[_questionNumber].CorrectAnswer);
-                _answers.Add(MainVM.ActivePack.Questions[_questionNumber].IncorrectAnswers[0]);
-                _answers.Add(MainVM.ActivePack.Questions[_questionNumber].IncorrectAnswers[1]);
-                _answers.Add(MainVM.ActivePack.Questions[_questionNumber].IncorrectAnswers[2]);
+                
+                _answers.Add(_randomQuestionOrder[QuestionNumber - 1].CorrectAnswer);
+                _answers.Add(_randomQuestionOrder[QuestionNumber - 1].IncorrectAnswers[0]);
+                _answers.Add(_randomQuestionOrder[QuestionNumber - 1].IncorrectAnswers[1]);
+                _answers.Add(_randomQuestionOrder[QuestionNumber - 1].IncorrectAnswers[2]);
+
+                //_answers.Add(MainVM.ActivePack.Questions[QuestionNumber].CorrectAnswer);
+                //_answers.Add(MainVM.ActivePack.Questions[QuestionNumber].IncorrectAnswers[0]);
+                //_answers.Add(MainVM.ActivePack.Questions[QuestionNumber].IncorrectAnswers[1]);
+                //_answers.Add(MainVM.ActivePack.Questions[QuestionNumber].IncorrectAnswers[2]);
 
                 _randomAnswerOrder = _answers.OrderBy(x => _rnd.Next()).ToList();
 
-                CurrentQuestion = MainVM.ActivePack.Questions[_questionNumber].Question;
+
+                CurrentQuestion = _randomQuestionOrder[QuestionNumber - 1].Question;
+                //CurrentQuestion = MainVM.ActivePack.Questions[QuestionNumber].Question;
                 AnswerButton1 = _randomAnswerOrder[0];
                 AnswerButton2 = _randomAnswerOrder[1];
                 AnswerButton3 = _randomAnswerOrder[2];
@@ -141,24 +182,32 @@ namespace QuizConfig.ViewModels
             }
             else
             {
-                _questionNumber++;
+                QuestionNumber++;
+                Thread.Sleep(1000);
                 ResetTimer();
                 RunQuiz();
             }
         }
 
 
-        private void AnswerClicked(object? obj)
+        private async void AnswerClicked(object? obj)
         {
-            if (obj == MainVM.ActivePack.Questions[_questionNumber].CorrectAnswer)
+            //if (obj == MainVM.ActivePack.Questions[_questionNumber].CorrectAnswer)
+            if (obj == _randomQuestionOrder[QuestionNumber - 1].CorrectAnswer)
             {
                 PlayerScore++;
-                Debug.WriteLine("Correct answer choosen");
+                ShowCorrectTickBox();
+            }
+            else
+            {
+                ShowWrongTickBox(obj);
             }
 
-            Thread.Sleep(1000);
+            await ShowTickAsync();
+            await Task.Delay(1000);
 
             QuestionNumber++;
+            ResetVisibility();
             ResetTimer();
             RunQuiz();
         }
@@ -173,6 +222,47 @@ namespace QuizConfig.ViewModels
                 TimerProgressBar = 100;
                 _elapsedTime = 0;
             }
+        }
+
+
+        private async Task ShowTickAsync()
+        {
+            await Task.Run(() => ShowCorrectTickBox());
+        }
+
+
+        private void ShowCorrectTickBox()
+        {
+            //if (AnswerButton1 == MainVM.ActivePack.Questions[_questionNumber].CorrectAnswer)
+            //    CorrectTick1 = Visibility.Visible;
+            //else if (AnswerButton2 == MainVM.ActivePack.Questions[_questionNumber].CorrectAnswer)
+            //    CorrectTick2 = Visibility.Visible;
+            //else if (AnswerButton3 == MainVM.ActivePack.Questions[_questionNumber].CorrectAnswer)
+            //    CorrectTick3 = Visibility.Visible;
+            //else if (AnswerButton4 == MainVM.ActivePack.Questions[_questionNumber].CorrectAnswer)
+            //    CorrectTick4 = Visibility.Visible;
+
+            if (AnswerButton1 == _randomQuestionOrder[QuestionNumber - 1].CorrectAnswer)
+                CorrectTick1 = Visibility.Visible;
+            else if (AnswerButton2 == _randomQuestionOrder[QuestionNumber - 1].CorrectAnswer)
+                CorrectTick2 = Visibility.Visible;
+            else if (AnswerButton3 == _randomQuestionOrder[QuestionNumber - 1].CorrectAnswer)
+                CorrectTick3 = Visibility.Visible;
+            else if (AnswerButton4 == _randomQuestionOrder[QuestionNumber - 1].CorrectAnswer)
+                CorrectTick4 = Visibility.Visible;
+        }
+
+
+        private void ShowWrongTickBox(object? obj)
+        {
+            if (AnswerButton1 == obj)
+                WrongTick1 = Visibility.Visible;
+            else if (AnswerButton2 == obj)
+                WrongTick2 = Visibility.Visible;
+            else if (AnswerButton3 == obj)
+                WrongTick3 = Visibility.Visible;
+            else if (AnswerButton4 == obj)
+                WrongTick4 = Visibility.Visible;
         }
         #endregion
 
