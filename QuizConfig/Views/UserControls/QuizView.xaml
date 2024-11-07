@@ -70,7 +70,7 @@
                     Padding="10"
                     Margin="5,5,5,5"
                     d:Content="Answer 1"
-                    Content="{Binding PlayVM.Answer1}"
+                    Content="{Binding PlayVM.AnswerButton1}"
                     Command="{Binding PlayVM.AnswerCMD}"
                     CommandParameter="{Binding Path=Content, RelativeSource={RelativeSource Self}}"
                     Grid.ColumnSpan="2" />
@@ -79,7 +79,7 @@
                     Padding="10"
                     Margin="5,5,5,5"
                     d:Content="Answer 2"
-                    Content="{Binding PlayVM.Answer2}"
+                    Content="{Binding PlayVM.AnswerButton2}"
                     Command="{Binding PlayVM.AnswerCMD}"
                     CommandParameter="{Binding Path=Content, RelativeSource={RelativeSource Self}}" />
             <Button Grid.Column="0"
@@ -87,7 +87,7 @@
                     Padding="10"
                     Margin="5,5,5,5"
                     d:Content="Answer 3"
-                    Content="{Binding PlayVM.Answer3}"
+                    Content="{Binding PlayVM.AnswerButton3}"
                     Command="{Binding PlayVM.AnswerCMD}"
                     CommandParameter="{Binding Path=Content, RelativeSource={RelativeSource Self}}"
                     Grid.ColumnSpan="2" />
@@ -96,7 +96,7 @@
                     Padding="10"
                     Margin="5,5,5,5"
                     d:Content="Answer 4"
-                    Content="{Binding PlayVM.Answer4}"
+                    Content="{Binding PlayVM.AnswerButton4}"
                     Command="{Binding PlayVM.AnswerCMD}"
                     CommandParameter="{Binding Path=Content, RelativeSource={RelativeSource Self}}" />
         </Grid>
