@@ -8,10 +8,13 @@
              d:DesignHeight="450"
              d:DesignWidth="800"
              Background="White">
-    
+
     <Grid>
-        <views:QuizStartView Visibility="{Binding PlayVM.QuizStartViewVisibility}" />
-        <views:QuizView Visibility="{Binding PlayVM.QuizViewVisibility}" />
-        <views:QuizEndView Visibility="{Binding PlayVM.QuizEndViewVisibility}" />
+        <views:QuizStartView d:Visibility="Hidden"
+                             Visibility="{Binding PlayVM.QuizStartViewVisibility}" />
+        <views:QuizView d:Visibility="Visible"
+                        Visibility="{Binding PlayVM.QuizViewVisibility}" />
+        <views:QuizEndView d:Visibility="Hidden"
+                           Visibility="{Binding PlayVM.QuizEndViewVisibility}" />
     </Grid>
 </UserControl>
