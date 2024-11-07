@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:QuizConfig.Views.UserControls"
+             xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
              mc:Ignorable="d"
              d:DesignHeight="450"
              d:DesignWidth="800"
@@ -15,7 +16,6 @@
           VerticalAlignment="Center"
           MaxWidth="400">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -54,27 +54,41 @@
         </StackPanel>
 
         <Grid Grid.Column="0"
-              Grid.Row="2"
-              Grid.ColumnSpan="2">
+              Grid.Row="2">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="33*" />
-                <ColumnDefinition Width="164*" />
-                <ColumnDefinition Width="197*" />
+                <ColumnDefinition Width="10" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="10" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="10" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <Button Grid.Column="0"
+
+            <Button Grid.Column="1"
                     Grid.Row="0"
                     Padding="10"
                     Margin="5,5,5,5"
                     d:Content="Answer 1"
                     Content="{Binding PlayVM.AnswerButton1}"
                     Command="{Binding PlayVM.AnswerCMD}"
-                    CommandParameter="{Binding Path=Content, RelativeSource={RelativeSource Self}}"
-                    Grid.ColumnSpan="2" />
-            <Button Grid.Column="2"
+                    CommandParameter="{Binding Path=Content, RelativeSource={RelativeSource Self}}" />
+            <local:CorrectTick Panel.ZIndex="20"
+                               Grid.Column="1"
+                               Grid.Row="0"
+                               HorizontalAlignment="Left"
+                               Margin="-4"
+                               Visibility="{Binding PlayVM.CorrectTick1}" />
+            <local:WrongTick Panel.ZIndex="10"
+                             Grid.Column="1"
+                             Grid.Row="0"
+                             HorizontalAlignment="Left"
+                             Margin="-4"
+                             Visibility="{Binding PlayVM.WrongTick1}" />
+
+            <Button Grid.Column="3"
                     Grid.Row="0"
                     Padding="10"
                     Margin="5,5,5,5"
@@ -82,16 +96,41 @@
                     Content="{Binding PlayVM.AnswerButton2}"
                     Command="{Binding PlayVM.AnswerCMD}"
                     CommandParameter="{Binding Path=Content, RelativeSource={RelativeSource Self}}" />
-            <Button Grid.Column="0"
+            <local:CorrectTick Panel.ZIndex="20"
+                               Grid.Column="3"
+                               Grid.Row="0"
+                               HorizontalAlignment="Right"
+                               Margin="-4"
+                               Visibility="{Binding PlayVM.CorrectTick2}" />
+            <local:WrongTick Panel.ZIndex="10"
+                             Grid.Column="3"
+                             Grid.Row="0"
+                             HorizontalAlignment="Right"
+                             Margin="-4"
+                             Visibility="{Binding PlayVM.WrongTick2}" />
+
+            <Button Grid.Column="1"
                     Grid.Row="1"
                     Padding="10"
                     Margin="5,5,5,5"
                     d:Content="Answer 3"
                     Content="{Binding PlayVM.AnswerButton3}"
                     Command="{Binding PlayVM.AnswerCMD}"
-                    CommandParameter="{Binding Path=Content, RelativeSource={RelativeSource Self}}"
-                    Grid.ColumnSpan="2" />
-            <Button Grid.Column="2"
+                    CommandParameter="{Binding Path=Content, RelativeSource={RelativeSource Self}}" />
+            <local:CorrectTick Panel.ZIndex="20"
+                               Grid.Column="1"
+                               Grid.Row="1"
+                               HorizontalAlignment="Left"
+                               Margin="-4"
+                               Visibility="{Binding PlayVM.CorrectTick3}" />
+            <local:WrongTick Panel.ZIndex="10"
+                             Grid.Column="1"
+                             Grid.Row="1"
+                             HorizontalAlignment="Left"
+                             Margin="-4"
+                             Visibility="{Binding PlayVM.WrongTick3}" />
+
+            <Button Grid.Column="3"
                     Grid.Row="1"
                     Padding="10"
                     Margin="5,5,5,5"
@@ -99,6 +138,19 @@
                     Content="{Binding PlayVM.AnswerButton4}"
                     Command="{Binding PlayVM.AnswerCMD}"
                     CommandParameter="{Binding Path=Content, RelativeSource={RelativeSource Self}}" />
+            <local:CorrectTick Panel.ZIndex="20"
+                               Grid.Column="3"
+                               Grid.Row="1"
+                               HorizontalAlignment="Right"
+                               Margin="-4"
+                               Visibility="{Binding PlayVM.CorrectTick4}" />
+            <local:WrongTick Panel.ZIndex="10"
+                             Grid.Column="3"
+                             Grid.Row="1"
+                             HorizontalAlignment="Right"
+                             Margin="-4"
+                             Visibility="{Binding PlayVM.WrongTick4}" />
+
         </Grid>
         <Label Grid.Column="0"
                Grid.Row="4"
