@@ -39,10 +39,10 @@
                     Command="{Binding OptionsDialogVM.OpenOptionsCMD}" />
         <KeyBinding Modifiers="Control"
                     Key="E"
-                    Command="{Binding MenuVM.SwitchViewCMD}" />
+                    Command="{Binding MenuVM.SwitchToEditViewCMD}" />
         <KeyBinding Modifiers="Control"
                     Key="P"
-                    Command="{Binding MenuVM.SwitchViewCMD}" />
+                    Command="{Binding MenuVM.SwitchToPlayViewCMD}" />
         <KeyBinding Modifiers="Control"
                     Key="Return"
                     Command="{Binding MenuVM.MaximizeWindowCMD}" />

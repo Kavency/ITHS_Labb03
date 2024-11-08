@@ -148,11 +148,10 @@ namespace QuizConfig.ViewModels
 
         private bool CanDeleteQuestion(object? arg)
         {
-            return true;
-            //if (_selectedQuestion is not null)
-            //    return true;
-            //else
-            //    return false;
+            if (_selectedQuestion is not null)
+                return true;
+            else
+                return false;
         }
 
         private void CancelInput(object? obj)

@@ -67,11 +67,7 @@
             </StackPanel>
         </Grid>
 
-        <StackPanel Grid.Column="0"
-                    Grid.Row="1"
-                    Orientation="Horizontal"
-                    Margin="5">
-        </StackPanel>
+        
 
         <StackPanel Grid.Column="0"
                     Grid.Row="1"
@@ -79,10 +75,12 @@
 
             <ListBox Grid.Column="0"
                      Grid.Row="2"
+                     Height="250"
                      ItemsSource="{Binding ActivePack.Questions}"
                      SelectedItem="{Binding ConfigVM.SelectedQuestion}"
                      SelectedIndex="{Binding ConfigVM.SelectedQestionIndex}"
-                     Margin="10,0">
+                     Margin="10,0"
+                     ScrollViewer.CanContentScroll="True">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Vertical">

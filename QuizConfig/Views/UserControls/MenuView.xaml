@@ -79,39 +79,13 @@
                               Icon="{fa:Icon pentosquare}"
                               InputGestureText="Ctrl+E"
                               x:Name="EditMenuItem"
-                              Command="{Binding MenuVM.SwitchViewCMD}">
-                        <MenuItem.Style>
-                            <Style TargetType="MenuItem">
-                                <Setter Property="IsEnabled"
-                                        Value="True" />
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding IsEnabled, ElementName=PlayMenuItem}"
-                                                 Value="true">
-                                        <Setter Property="IsEnabled"
-                                                Value="False" />
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </MenuItem.Style>
+                              Command="{Binding MenuVM.SwitchToEditViewCMD}">
                     </MenuItem>
                     <MenuItem Header="_Play"
                               x:Name="PlayMenuItem"
                               Icon="{fa:Icon play}"
                               InputGestureText="Ctrl+P"
-                              Command="{Binding MenuVM.SwitchViewCMD}">
-                        <MenuItem.Style>
-                            <Style TargetType="MenuItem">
-                                <Setter Property="IsEnabled"
-                                        Value="True" />
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding IsEnabled, ElementName=EditMenuItem}"
-                                                 Value="true">
-                                        <Setter Property="IsEnabled"
-                                                Value="False" />
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </MenuItem.Style>
+                              Command="{Binding MenuVM.SwitchToPlayViewCMD}">
                     </MenuItem>
                     <Separator />
                     <MenuItem Header="Dark mode"

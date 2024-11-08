@@ -9,16 +9,24 @@ namespace QuizConfig.MiscClasses
         {
             if(value is Difficulty difficulty)
             {
-                return difficulty.ToString();
+                string lowerCase = difficulty.ToString();
+
+                return char.ToUpper(lowerCase[0]) + lowerCase.Substring(1);
             }
             return null;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if(value is string difficultyString && Enum.TryParse(typeof(Difficulty), difficultyString,out var result))
+
+            if(value is string difficultyString)
             {
-                return result;
+                string lowerCase = difficultyString.ToLower();
+
+                if(Enum.TryParse(typeof(Difficulty), lowerCase, out var result))
+                {
+                    return result;
+                }
             }
             return null;
         }

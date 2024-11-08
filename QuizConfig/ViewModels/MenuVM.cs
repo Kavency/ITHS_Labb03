@@ -1,10 +1,8 @@
 ﻿using FontAwesome.Sharp;
 using QuizConfig.Commands;
-using QuizConfig.Models;
 using QuizConfig.Views.Dialogs;
 using System.Diagnostics;
 using System.Windows;
-using System.Windows.Controls;
 
 namespace QuizConfig.ViewModels
 {
@@ -12,44 +10,56 @@ namespace QuizConfig.ViewModels
     {
         #region Properties
         public MainVM MainVM { get; set; }
-        public RelayCommand SwitchViewCMD { get; }
+        public RelayCommand SwitchToEditViewCMD { get; }
+        public RelayCommand SwitchToPlayViewCMD { get; }
         public RelayCommand SetActivePackCMD { get; }
         public RelayCommand MinimizeWindowCMD { get; }
         public RelayCommand MaximizeWindowCMD { get; }
         public RelayCommand ExitProgramCMD { get; }
         #endregion
 
+
         #region Constructor
         public MenuVM(MainVM mainVM)
         {
             this.MainVM = mainVM;
 
-            this.SwitchViewCMD = new RelayCommand(SwitchView);
+            this.SwitchToEditViewCMD = new RelayCommand(SwitchToEditView);
+            this.SwitchToPlayViewCMD = new RelayCommand(SwitchToPlayView);
             this.SetActivePackCMD = new RelayCommand(SetActivePack);
             this.MaximizeWindowCMD = new RelayCommand(MaximizeWindow);
             this.MinimizeWindowCMD = new RelayCommand(MinimizeWindow);
             this.ExitProgramCMD = new RelayCommand(ExitProgram);
         }
 
+
+        private void SwitchToEditView(object? obj)
+        {
+            MainVM.EditVisibility = Visibility.Visible;
+            MainVM.PlayVisibility = Visibility.Hidden;
+            MainVM.PlayVM.QuizStartViewVisibility = Visibility.Visible;
+            MainVM.PlayVM.QuizViewVisibility = Visibility.Hidden;
+            MainVM.PlayVM.QuizEndViewVisibility = Visibility.Hidden;
+            SwitchToEditViewCMD.RaiseCanExecuteChanged();
+            SwitchToPlayViewCMD.RaiseCanExecuteChanged();
+        }
+
+
+        private void SwitchToPlayView(object? obj)
+        {
+            MainVM.EditVisibility = Visibility.Hidden;
+            MainVM.PlayVisibility = Visibility.Visible;
+            MainVM.PlayVM.QuizStartViewVisibility = Visibility.Visible;
+            MainVM.PlayVM.QuizViewVisibility = Visibility.Hidden;
+            MainVM.PlayVM.QuizEndViewVisibility = Visibility.Hidden;
+            SwitchToEditViewCMD.RaiseCanExecuteChanged();
+            SwitchToPlayViewCMD.RaiseCanExecuteChanged();
+        }
+
         #endregion
 
+
         #region Methods
-        private void SwitchView(object? obj)
-        {
-            if (MainVM.EditVisibility == Visibility.Visible)
-            {
-                MainVM.EditVisibility = Visibility.Hidden;
-                MainVM.PlayVisibility = Visibility.Visible;
-                MainVM.PlayVM.QuizStartViewVisibility = Visibility.Visible;
-                MainVM.PlayVM.QuizViewVisibility = Visibility.Hidden;
-                MainVM.PlayVM.QuizEndViewVisibility = Visibility.Hidden;
-            }
-            else
-            {
-                MainVM.EditVisibility = Visibility.Visible;
-                MainVM.PlayVisibility = Visibility.Hidden;
-            }
-        }
         private void SetActivePack(object? obj)
         {
             MainVM.ActivePack = obj as QuestionPackVM;

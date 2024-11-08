@@ -49,7 +49,7 @@ namespace QuizConfig.ViewModels
         private async void Update(object? obj)
         {
             this.MainVM.ActivePack.Name = Name;
-            this.MainVM.ActivePack.Difficulty = Difficulty;
+            this.MainVM.ActivePack.Difficulty = SelectedDifficulty;
             this.MainVM.ActivePack.TimeLimit = TimeLimit;
             await MainVM.FileHandler.SaveToFileAsync();
             Cancel(obj);
