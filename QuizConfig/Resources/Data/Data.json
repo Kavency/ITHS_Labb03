@@ -1,0 +1,256 @@
+[
+  {
+    "name": "Music pack",
+    "timeLimit": 20,
+    "difficulty": "easy",
+    "questions": [
+      {
+        "type": "multiple",
+        "difficulty": "easy",
+        "category": "Entertainment: Music",
+        "question": "Who had a 1983 hit with the song Africa?",
+        "correct_answer": "Toto",
+        "incorrect_answers": [
+          "Foreigner",
+          "Steely Dan",
+          "Journey"
+        ]
+      },
+      {
+        "type": "multiple",
+        "difficulty": "easy",
+        "category": "Entertainment: Music",
+        "question": "The Singing Cowboy Gene Autry is credited with the first recording for all but which classic Christmas jingle?",
+        "correct_answer": "White Christmas",
+        "incorrect_answers": [
+          "Frosty the Snowman",
+          "Rudolph the Red-Nosed Reindeer",
+          "Here Comes Santa Claus"
+        ]
+      },
+      {
+        "type": "multiple",
+        "difficulty": "easy",
+        "category": "Entertainment: Music",
+        "question": "What is the stage name of English female rapper Mathangi Arulpragasam, who is known for the song Paper Planes?",
+        "correct_answer": "M.I.A.",
+        "incorrect_answers": [
+          "K.I.A.",
+          "C.I.A.",
+          "A.I.A."
+        ]
+      },
+      {
+        "type": "multiple",
+        "difficulty": "easy",
+        "category": "Entertainment: Music",
+        "question": "What was Rage Against the Machine's debut album?",
+        "correct_answer": "Rage Against the Machine",
+        "incorrect_answers": [
+          "Evil Empire",
+          "Bombtrack",
+          "The Battle Of Los Angeles"
+        ]
+      },
+      {
+        "type": "multiple",
+        "difficulty": "easy",
+        "category": "Entertainment: Music",
+        "question": "Which song on Daft Punk's Random Access Memories features Pharrell Williams?",
+        "correct_answer": "Get Lucky",
+        "incorrect_answers": [
+          "Doin&#039; It Right",
+          "Instant Crush",
+          "The Game of Love"
+        ]
+      },
+      {
+        "type": "multiple",
+        "difficulty": "easy",
+        "category": "Entertainment: Music",
+        "question": "Which band released songs suchs as Rio, Girls on Film, and The Reflex?",
+        "correct_answer": "Duran Duran",
+        "incorrect_answers": [
+          "The Cure",
+          "New Order",
+          "Depeche Mode"
+        ]
+      },
+      {
+        "type": "multiple",
+        "difficulty": "easy",
+        "category": "Entertainment: Music",
+        "question": "Which English guitarist has the nickname Slowhand?",
+        "correct_answer": "Eric Clapton",
+        "incorrect_answers": [
+          "Mark Knopfler",
+          "Jeff Beck",
+          "Jimmy Page"
+        ]
+      },
+      {
+        "type": "multiple",
+        "difficulty": "easy",
+        "category": "Entertainment: Music",
+        "question": "What is the name of Rivers Cuomo's wife?",
+        "correct_answer": "Kyoko Ito",
+        "incorrect_answers": [
+          "Yoko Ono",
+          "Kyary Pamyu Pamyu",
+          "LiSA"
+        ]
+      },
+      {
+        "type": "multiple",
+        "difficulty": "easy",
+        "category": "Entertainment: Music",
+        "question": "What was Daft Punk's first studio album?",
+        "correct_answer": "Homework",
+        "incorrect_answers": [
+          "Discovery",
+          "Random Access Memories",
+          "Human After All"
+        ]
+      },
+      {
+        "type": "multiple",
+        "difficulty": "easy",
+        "category": "Entertainment: Music",
+        "question": "What album did The Lumineers release in 2016?",
+        "correct_answer": "Cleopatra",
+        "incorrect_answers": [
+          "Winter",
+          "The Lumineers",
+          "Tracks From The Attic"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Movie pack",
+    "timeLimit": 20,
+    "difficulty": "easy",
+    "questions": [
+      {
+        "type": "multiple",
+        "difficulty": "easy",
+        "category": "Entertainment: Film",
+        "question": "The 1996 film Fargo is primarily set in which US state?",
+        "correct_answer": "Minnesota",
+        "incorrect_answers": [
+          "North Dakota",
+          "South Dakota",
+          "Wisconsin"
+        ]
+      },
+      {
+        "type": "multiple",
+        "difficulty": "easy",
+        "category": "Entertainment: Film",
+        "question": "Which of these movies did Jeff Bridges not star in?",
+        "correct_answer": "The Hateful Eight",
+        "incorrect_answers": [
+          "Tron: Legacy",
+          "The Giver",
+          "True Grit"
+        ]
+      },
+      {
+        "type": "multiple",
+        "difficulty": "easy",
+        "category": "Entertainment: Film",
+        "question": "Where does the original Friday The 13th movie take place?",
+        "correct_answer": "Camp Crystal Lake",
+        "incorrect_answers": [
+          "Packanack",
+          "Higgins Haven",
+          "Camp Forest Green"
+        ]
+      },
+      {
+        "type": "multiple",
+        "difficulty": "easy",
+        "category": "Entertainment: Film",
+        "question": "Which of the following actors has only been in a Quentin Tarantino directed film once?",
+        "correct_answer": "John Travolta",
+        "incorrect_answers": [
+          "Christoph Waltz",
+          "Harvey Keitel",
+          "Samuel L. Jackson"
+        ]
+      },
+      {
+        "type": "multiple",
+        "difficulty": "easy",
+        "category": "Entertainment: Film",
+        "question": "The 2002 film 28 Days Later is mainly set in which European country?",
+        "correct_answer": "United Kingdom",
+        "incorrect_answers": [
+          "France",
+          "Italy",
+          "Germany"
+        ]
+      },
+      {
+        "type": "multiple",
+        "difficulty": "easy",
+        "category": "Entertainment: Film",
+        "question": "Who played the female lead in the 1933 film King Kong?",
+        "correct_answer": "Fay Wray",
+        "incorrect_answers": [
+          "Jean Harlow",
+          "Vivien Leigh",
+          "Mae West"
+        ]
+      },
+      {
+        "type": "multiple",
+        "difficulty": "easy",
+        "category": "Entertainment: Film",
+        "question": "This movie contains the quote, 'Nobody puts Baby in a corner.'",
+        "correct_answer": "Dirty Dancing",
+        "incorrect_answers": [
+          "Three Men and a Baby",
+          "Ferris Bueller's Day Off",
+          "Pretty in Pink"
+        ]
+      },
+      {
+        "type": "multiple",
+        "difficulty": "easy",
+        "category": "Entertainment: Film",
+        "question": "What is the oldest Disney film?",
+        "correct_answer": "Snow White and the Seven Dwarfs",
+        "incorrect_answers": [
+          "Pinocchio",
+          "Dumbo",
+          "Fantasia"
+        ]
+      },
+      {
+        "type": "multiple",
+        "difficulty": "easy",
+        "category": "Entertainment: Film",
+        "question": "Which of the following movies was not based on a novel by Stephen King? ",
+        "correct_answer": "The Thing",
+        "incorrect_answers": [
+          "Carrie",
+          "Misery",
+          "The Green Mile"
+        ]
+      },
+      {
+        "type": "multiple",
+        "difficulty": "easy",
+        "category": "Entertainment: Film",
+        "question": "Who directed the Kill Bill movies?",
+        "correct_answer": "Quentin Tarantino",
+        "incorrect_answers": [
+          "Arnold Schwarzenegger",
+          "David Lean",
+          "Stanley Kubrick"
+        ]
+      }
+    ]
+  }
+]

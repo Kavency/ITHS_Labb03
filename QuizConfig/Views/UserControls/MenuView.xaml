@@ -48,7 +48,8 @@
                     <MenuItem Header="Delete question pack"
                               Icon="{fa:Icon trashcan}"
                               InputGestureText="Ctrl+Del"
-                              Command="{Binding DataContext.ConfigVM.DeletePackCMD, RelativeSource={RelativeSource AncestorType=Window}}" />
+                              Command="{Binding ConfigVM.DeletePackCMD}"
+                              IsEnabled="{Binding ConfigVM.DeletePackCMD}"/>
                     <Separator />
                     <MenuItem Header="Import questions"
                               Icon="{fa:Icon download}" />
@@ -63,11 +64,12 @@
                     <MenuItem Header="_Add"
                               Icon="{fa:Icon plus}"
                               InputGestureText="Ctrl++"
-                              Command="{Binding ConfigVM.AddNewQuestionCMD}" />
+                              Command="{Binding ConfigVM.AddQuestionCMD}" />
                     <MenuItem Header="_Remove"
                               Icon="{fa:Icon minus}"
                               InputGestureText="Ctrl+-"
-                              Command="{Binding ConfigVM.DeleteQuestionCMD}" />
+                              Command="{Binding ConfigVM.DeleteQuestionCMD}"
+                              IsEnabled="{Binding ConfigVM.DeleteQuestionCMD}"/>
                     <MenuItem Header="_Options"
                               Icon="{fa:Icon list}"
                               InputGestureText="Ctrl+O"
@@ -79,17 +81,16 @@
                               Icon="{fa:Icon pentosquare}"
                               InputGestureText="Ctrl+E"
                               x:Name="EditMenuItem"
-                              Command="{Binding MenuVM.SwitchToEditViewCMD}">
+                              Command="{Binding MenuVM.SwitchToEditViewCMD}"
+                              IsEnabled="{Binding MenuVM.SwitchToEditViewCMD}">
                     </MenuItem>
                     <MenuItem Header="_Play"
                               x:Name="PlayMenuItem"
                               Icon="{fa:Icon play}"
                               InputGestureText="Ctrl+P"
-                              Command="{Binding MenuVM.SwitchToPlayViewCMD}">
+                              Command="{Binding MenuVM.SwitchToPlayViewCMD}"
+                              IsEnabled="{Binding MenuVM.SwitchToPlayViewCMD}">
                     </MenuItem>
-                    <Separator />
-                    <MenuItem Header="Dark mode"
-                              Icon="{fa:Icon circlehalfstroke}" />
                     <Separator />
                     <MenuItem Header="Fullscreen"
                               Icon="{fa:Icon expand}"
@@ -101,7 +102,6 @@
                Grid.Column="1"
                HorizontalAlignment="Center"
                HorizontalContentAlignment="Center" />
-        <!--MouseDown="Menu_MouseDown"-->
 
         <Menu Grid.Column="2"
               HorizontalAlignment="Right">

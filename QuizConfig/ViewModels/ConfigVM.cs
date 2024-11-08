@@ -17,22 +17,21 @@ namespace QuizConfig.ViewModels
         private Visibility _saveAndCloseButtonVisibility = Visibility.Visible;
         private Visibility _saveAndAddButtonVisibility = Visibility.Visible;
         private Visibility _updateButtonVisibility = Visibility.Collapsed;
-        private int? _selectedQuestionIndex = null;
         private int _selectedMenuItem;
         private QuestionVM? _selectedQuestion = null;
         #endregion
+
 
         #region Properties
         public MainVM MainVM { get; set; }
         public RelayCommand AddPackCMD { get; }
         public RelayCommand DeletePackCMD { get; }
-        public RelayCommand QuestionFormVisibilityCMD { get; }
+        public RelayCommand AddQuestionCMD { get; }
+        public RelayCommand DeleteQuestionCMD { get; }
         public RelayCommand SaveAndCloseButtonCMD { get; }
         public RelayCommand SaveAndAddButtonCMD { get; }
         public RelayCommand UpdateQuestionCMD { get; }
         public RelayCommand CancelCMD { get; }
-        public RelayCommand DeleteQuestionCMD { get; }
-        public RelayCommand AddNewQuestionCMD { get; }
 
         public string QuestionTextBox
 		{
@@ -79,31 +78,27 @@ namespace QuizConfig.ViewModels
             get { return _updateButtonVisibility; }
             set { _updateButtonVisibility = value; OnPropertyChanged(); }
         }
-        public int? SelectedQestionIndex
-        {
-            get { return _selectedQuestionIndex; }
-            set { _selectedQuestionIndex = value; OnPropertyChanged(); }
-        }
         public QuestionVM? SelectedQuestion
         {
             get { return _selectedQuestion; }
             set 
             { 
                 _selectedQuestion = value;
-                QuestionFormVisibility = _selectedQuestion != null ? Visibility.Visible : Visibility.Hidden;
-                SaveAndCloseButtonVisibility = _selectedQuestion != null ? Visibility.Collapsed : Visibility.Visible;
-                SaveAndAddButtonVisibility = _selectedQuestion != null ? Visibility.Collapsed : Visibility.Visible;
-                UpdateButtonVisibility = _selectedQuestion != null ? Visibility.Visible : Visibility.Collapsed;
+                QuestionFormVisibility = SelectedQuestion != null ? Visibility.Visible : Visibility.Hidden;
+                SaveAndCloseButtonVisibility = SelectedQuestion != null ? Visibility.Collapsed : Visibility.Visible;
+                SaveAndAddButtonVisibility = SelectedQuestion != null ? Visibility.Collapsed : Visibility.Visible;
+                UpdateButtonVisibility = SelectedQuestion != null ? Visibility.Visible : Visibility.Collapsed;
 
-                if(_selectedQuestion is not null)
+                if(SelectedQuestion is not null)
                 {
-                    QuestionTextBox = _selectedQuestion.Question;
-                    CorrectAnswerTextBox = _selectedQuestion.CorrectAnswer;
-                    WrongAnswer1TextBox = _selectedQuestion.IncorrectAnswers[0];
-                    WrongAnswer2TextBox = _selectedQuestion.IncorrectAnswers[1];
-                    WrongAnswer3TextBox = _selectedQuestion.IncorrectAnswers[2];
+                    QuestionTextBox = SelectedQuestion.Question;
+                    CorrectAnswerTextBox = SelectedQuestion.CorrectAnswer;
+                    WrongAnswer1TextBox = SelectedQuestion.IncorrectAnswers[0];
+                    WrongAnswer2TextBox = SelectedQuestion.IncorrectAnswers[1];
+                    WrongAnswer3TextBox = SelectedQuestion.IncorrectAnswers[2];
                 }
                 OnPropertyChanged();
+                DeleteQuestionCMD.RaiseCanExecuteChanged();
             }
         }
         public int SelectedMenuItem
@@ -120,14 +115,13 @@ namespace QuizConfig.ViewModels
             this.MainVM = mainVM;
 
             this.AddPackCMD = new RelayCommand(AddPack);
-            this.DeletePackCMD = new RelayCommand(DeletePack);
-            this.QuestionFormVisibilityCMD = new RelayCommand(ChangeQuestionFormVisibility);
+            this.DeletePackCMD = new RelayCommand(DeletePack, CanDeletePack);
             this.SaveAndCloseButtonCMD = new RelayCommand(AddQuestionAndClose);
             this.SaveAndAddButtonCMD = new RelayCommand(AddQuestionAndClear);
             this.UpdateQuestionCMD = new RelayCommand(UpdateQuestion);
             this.CancelCMD = new RelayCommand(CancelInput);
             this.DeleteQuestionCMD = new RelayCommand(DeleteQuestion, CanDeleteQuestion);
-            this.AddNewQuestionCMD = new RelayCommand(AddQuestion);
+            this.AddQuestionCMD = new RelayCommand(AddQuestion);
         }
      
 
@@ -146,21 +140,17 @@ namespace QuizConfig.ViewModels
             await MainVM.FileHandler.SaveToFileAsync();
         }
 
-        private bool CanDeleteQuestion(object? arg)
-        {
-            if (_selectedQuestion is not null)
-                return true;
-            else
-                return false;
-        }
+
+        private bool CanDeleteQuestion(object? arg) => SelectedQuestion is not null ? true : false;
+
 
         private void CancelInput(object? obj)
         {
             ClearTextBoxes();
             QuestionFormVisibility = Visibility.Hidden;
             SelectedQuestion = null;
-            SelectedQestionIndex = null;
         }
+
 
         private async void UpdateQuestion(object? obj)
         {
@@ -173,14 +163,15 @@ namespace QuizConfig.ViewModels
             CancelInput(obj);
         }
 
+
         private async void AddQuestionAndClear(object? obj)
         {
-            // TODO: Check if textboxes are empty
             QuestionVM newQuestion = new QuestionVM(new QuestionModel(QuestionTextBox, CorrectAnswerTextBox, WrongAnswer1TextBox, WrongAnswer2TextBox, WrongAnswer3TextBox));
             MainVM.ActivePack.Questions.Add(newQuestion);
             await MainVM.FileHandler.SaveToFileAsync();
             ClearTextBoxes();
         }
+
 
         private async void AddQuestionAndClose(object? obj)
         {
@@ -190,10 +181,6 @@ namespace QuizConfig.ViewModels
             CancelInput(obj);
         }
 
-        private void ChangeQuestionFormVisibility(object? obj)
-        {
-            throw new NotImplementedException();
-        }
 
         private async void AddPack(object? obj)
         {
@@ -201,16 +188,29 @@ namespace QuizConfig.ViewModels
             createPackDialog.ShowDialog();
         }
 
+
         private async void DeletePack(object? obj)
         {
             MainVM.QuestionPacks.Remove(MainVM.ActivePack);
             if (MainVM.QuestionPacks.Count > 0)
                 MainVM.ActivePack = MainVM.QuestionPacks.First();
             else
+            {
                 MainVM.ActivePack = null;
-            await MainVM.FileHandler.SaveToFileAsync();
+            }
 
+            await MainVM.FileHandler.SaveToFileAsync();
         }
+
+
+        private bool CanDeletePack(object? arg)
+        {
+            if (MainVM.QuestionPacks is not null || MainVM.QuestionPacks.Count > 1)
+                return true;
+            else
+                return false;
+        }
+
 
         private void ClearTextBoxes()
         {

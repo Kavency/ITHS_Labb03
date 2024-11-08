@@ -13,7 +13,8 @@
         Width="800"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
-        WindowStyle="None">
+        WindowStyle="None"
+        Icon="/Views/Windows/Icon_32x32.ico">
     
     <Window.InputBindings>
         <KeyBinding Modifiers="Control"

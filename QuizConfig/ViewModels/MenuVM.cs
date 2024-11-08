@@ -45,6 +45,9 @@ namespace QuizConfig.ViewModels
         }
 
 
+        private bool CanSwitchToEditView(object? obj) => MainVM.EditVisibility != Visibility.Visible;
+
+
         private void SwitchToPlayView(object? obj)
         {
             MainVM.EditVisibility = Visibility.Hidden;
@@ -56,6 +59,8 @@ namespace QuizConfig.ViewModels
             SwitchToPlayViewCMD.RaiseCanExecuteChanged();
         }
 
+
+        private bool CanSwitchToPlayView(object? obj) => MainVM.PlayVisibility != Visibility.Visible;
         #endregion
 
 

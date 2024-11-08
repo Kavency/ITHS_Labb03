@@ -160,7 +160,7 @@ namespace QuizConfig.ViewModels
         }
 
 
-        private void Timer_Tick(object sender, EventArgs e)
+        private async void Timer_Tick(object sender, EventArgs e)
         {
             _elapsedTime++;
             QuestionTimeLimit--;
@@ -175,6 +175,7 @@ namespace QuizConfig.ViewModels
             else
             {
                 QuestionNumber++;
+                await ShowTickAsync();
                 Thread.Sleep(1000);
                 ResetTimer();
                 RunQuiz();

@@ -49,7 +49,7 @@ namespace QuizConfig.MiscClasses
                 MainVM.QuestionPacks[0].Questions.Add(new QuestionVM(new QuestionModel("Is this a demo question?",
                     "Yes, it is.", "No, I don't think so.", "It's a trick question, not a demo.", "What was the question again?")));
 
-                // Message to user on failed load.
+                await SaveToFileAsync();
 
                 Debug.WriteLine($"Error loading file: {e.Message}");
             }

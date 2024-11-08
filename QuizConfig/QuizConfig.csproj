@@ -9,7 +9,28 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Views\Windows\Icon_32x32.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="FontAwesome.Sharp" Version="6.6.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Resources\Data\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Views\Windows\Icon_32x32.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Resources\Data\Data.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Icon_32x32.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

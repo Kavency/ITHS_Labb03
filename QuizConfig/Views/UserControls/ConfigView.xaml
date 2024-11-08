@@ -58,12 +58,13 @@
                         Padding="10,5"
                         Margin="5"
                         ToolTip="Add a question"
-                        Command="{Binding ConfigVM.AddNewQuestionCMD}" />
+                        Command="{Binding ConfigVM.AddQuestionCMD}" />
                 <Button Content="{fa:Icon minus}"
                         Padding="10,5"
                         Margin="5"
                         ToolTip="Delete selected question"
-                        Command="{Binding ConfigVM.DeleteQuestionCMD}" />
+                        Command="{Binding ConfigVM.DeleteQuestionCMD}"
+                        IsEnabled="{Binding ConfigVM.DeleteQuestionCMD}"/>
             </StackPanel>
         </Grid>
 
